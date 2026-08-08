@@ -44,6 +44,15 @@ h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); }
 h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
 h3 { font-size: 1.25rem; }
 
+/* headings pick up a tint of their section's palette color, not just plain ink */
+.hero-title,
+.section-card h2 {
+  color: color-mix(in srgb, var(--section-accent, var(--accent-1)) 42%, var(--text) 58%);
+}
+.flip-back h3 {
+  color: color-mix(in srgb, var(--section-accent, var(--accent-1)) 55%, var(--art-text) 45%);
+}
+
 p { margin: 0 0 1em; color: var(--text); }
 .muted { color: var(--text-muted); }
 
@@ -122,7 +131,7 @@ img { max-width: 100%; display: block; }
 .btn-solid {
   background: var(--accent-1);
   border-color: var(--accent-1);
-  color: #FFFDF9;
+  color: var(--ink-on-accent);
 }
 .btn-solid:hover, .btn-solid:focus-visible {
   background: color-mix(in srgb, var(--accent-1) 85%, black);
@@ -134,7 +143,7 @@ img { max-width: 100%; display: block; }
   left: -999px;
   top: 0;
   background: var(--accent-1);
-  color: #fff;
+  color: var(--ink-on-accent);
   padding: 0.8em 1.2em;
   z-index: 1000;
   border-radius: 0 0 10px 0;

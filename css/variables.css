@@ -8,7 +8,7 @@
 :root {
   /* warm multicolor (default) */
   --bg: #FAF6F0;
-  --surface: #FFFFFF;
+  --surface: #FFFDF7; /* off-white, never pure white */
   --text: #1A1A1A;
   --text-muted: #57524b;
   --accent-1: #5D51A1; /* muted brand purple */
@@ -18,6 +18,7 @@
   --accent-5: #4A6B53; /* moss green */
   --border: rgba(26, 26, 26, 0.12);
   --shadow: rgba(26, 26, 26, 0.14);
+  --ink-on-accent: #FFFCF4; /* off-white text/ink used on colored backgrounds — never pure white */
 
   /* artwork areas always sit on warm milk white, regardless of theme */
   --art-bg: #FAF6F0;
@@ -38,7 +39,7 @@
 
 :root[data-theme="icy"] {
   --bg: #EAF4F8; /* invented light neutral — Sallee's swatches were accents only */
-  --surface: #FFFFFF;
+  --surface: #F8FCFD; /* off-white, never pure white */
   --text: #16232B; /* invented dark neutral, for body-text contrast */
   --text-muted: #4D6472;
   --accent-1: #095f92; /* Sallee's icy palette */
