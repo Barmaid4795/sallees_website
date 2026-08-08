@@ -42,7 +42,7 @@
     var anchor = document.createElement("span");
     anchor.className = "bear-trail-anchor";
     anchor.style.top = Math.min(y, endY) + "px";
-    anchor.innerHTML = '<img src="assets/images/bear-trail.svg" alt="A bear, following its tracks">';
+    anchor.innerHTML = '<img src="assets/images/bear-trail.png" alt="A bear, following its tracks">';
     rail.appendChild(anchor);
     prints.push(anchor);
 

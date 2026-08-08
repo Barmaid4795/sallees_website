@@ -9,11 +9,11 @@ body {
   margin: 0;
   position: relative;
   background:
-    radial-gradient(620px 520px at 92% 2%, color-mix(in srgb, var(--accent-3) 32%, transparent), transparent 70%),
-    radial-gradient(520px 460px at -6% 24%, color-mix(in srgb, var(--accent-4) 30%, transparent), transparent 70%),
-    radial-gradient(620px 520px at 100% 52%, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 70%),
-    radial-gradient(560px 480px at -4% 78%, color-mix(in srgb, var(--accent-5) 18%, transparent), transparent 70%),
-    radial-gradient(600px 500px at 96% 98%, color-mix(in srgb, var(--accent-1) 22%, transparent), transparent 70%),
+    radial-gradient(680px 560px at 92% 2%, color-mix(in srgb, var(--accent-3) 48%, transparent), transparent 72%),
+    radial-gradient(560px 500px at -6% 24%, color-mix(in srgb, var(--accent-4) 46%, transparent), transparent 72%),
+    radial-gradient(680px 560px at 100% 52%, color-mix(in srgb, var(--accent-2) 40%, transparent), transparent 72%),
+    radial-gradient(600px 520px at -4% 78%, color-mix(in srgb, var(--accent-5) 32%, transparent), transparent 72%),
+    radial-gradient(650px 540px at 96% 98%, color-mix(in srgb, var(--accent-1) 38%, transparent), transparent 72%),
     var(--bg);
   background-repeat: no-repeat;
   color: var(--text);
@@ -78,7 +78,7 @@ img { max-width: 100%; display: block; }
 
 .section-card {
   position: relative;
-  background: var(--surface);
+  background: color-mix(in srgb, var(--section-accent, var(--accent-1)) 7%, var(--surface));
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   box-shadow: 0 30px 60px -40px var(--shadow);

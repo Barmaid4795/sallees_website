@@ -6,16 +6,17 @@ Three are already real: `orca-2026.jpg` ("Orca 2026"), `mural-signals-flow.jpg` 
 
 | File | Used for | Suggested aspect ratio |
 |---|---|---|
-| `hero-featured.svg` | Homepage featured artwork | ~10:7 landscape |
 | `portrait.svg` | About Me photo | ~4:5 portrait |
 | `orca-2026.jpg` | "Orca 2026" acrylic painting | square-ish — real image in place |
 | `mural-signals-flow.jpg` | "Where Signals Flow Like Water" mural (panoramic, horizontal-scroll) | very wide — real image in place |
 | `ucalgary-resource-page.jpg` | UCalgary Indigenous Student Resource Page project | portrait poster — real image in place |
 | `academic-turnaround.svg` | Academic Turnaround Program workbook/infographics | 4:3 |
 | `handmade-jewelry.svg` | Handmade Creations — jewelry item | 1:1 square |
-| `handmade-clothing.svg` | Handmade Creations — clothing item | 1:1 square |
+| `handmade-dreamcatcher.svg` | Handmade Creations — dream catcher | 1:1 square |
 | `handmade-other.svg` | Handmade Creations — other item | 1:1 square |
-| `bear-trail.svg` | The bear illustration at the bottom of the right-edge print trail (referenced from `js/footprints.js`, not `index.html`) | roughly square, transparent background works best |
+| `bear-trail.png` | The bear illustration at the bottom of the right-edge print trail (referenced from `js/footprints.js`, not `index.html`) — real image in place, transparent background | ~3:2, transparent background |
+
+Note: there's no more homepage featured-artwork image — the hero is text-only now, per Sallee's request to remove it.
 
 You can add more handmade/art pieces by copying an existing `<article class="flip-card">` block in `index.html`, giving it a new image filename, and dropping the matching file in here.
 
