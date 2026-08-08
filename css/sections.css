@@ -128,12 +128,14 @@
   align-items: start;
 }
 .hero-half .section-kicker { margin-bottom: 1rem; }
-.hero-lead {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-  line-height: 1.35;
-  color: color-mix(in srgb, var(--accent-1) 42%, var(--text) 58%);
+.hero-portrait {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--art-bg);
+  border: 1px solid var(--art-border);
+  aspect-ratio: 4 / 3;
 }
+.hero-portrait img { width: 100%; height: 100%; object-fit: cover; }
 .hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 1.6rem; }
 
 .greeting {
@@ -504,56 +506,50 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 .contact-direct a { font-weight: 600; }
 @media (max-width: 860px) { .contact-wrap { grid-template-columns: 1fr; } }
 
-/* ===================== BEAR PRINT SCROLL TRAIL ===================== */
-.footprint-rail {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50px;
-  height: 100%;
-  pointer-events: none;
-  z-index: 3;
-}
-.bear-print {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  opacity: 0;
-  transform: rotate(var(--rot, 0deg)) scale(0.45);
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.bear-print.is-visible {
-  opacity: 0.55;
-  transform: rotate(var(--rot, 0deg)) scale(1);
-}
-.bear-print svg { width: 100%; height: 100%; color: var(--accent-5); }
-
-.bear-trail-anchor {
-  position: absolute;
-  right: -14px;
-  width: 130px;
-  height: 90px;
-  opacity: 0;
-  transform: translateY(10px) scale(0.85);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.bear-trail-anchor.is-visible { opacity: 1; transform: translateY(0) scale(1); }
-.bear-trail-anchor img { width: 100%; height: 100%; object-fit: contain; }
-
-@media (max-width: 640px) {
-  /* keep the small paw-print trail desktop-only, but still show the bear itself */
-  .bear-print { display: none; }
-  .footprint-rail { width: 96px; }
-  .bear-trail-anchor { right: 6px; width: 90px; height: 62px; }
-}
-
 /* ===================== FOOTER ===================== */
 .site-footer {
   background: var(--accent-5);
   color: #FAF6F0;
-  padding: 3rem 0 2.2rem;
+  padding: 2.2rem 0 2.2rem;
+  overflow: hidden;
 }
 :root[data-theme="icy"] .site-footer { background: var(--accent-5); }
+
+/* bear + footprint trail, sitting just above the copyright/contact note */
+.footer-track {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 1.8rem;
+}
+.footer-bear {
+  width: 84px;
+  height: 58px;
+  flex-shrink: 0;
+}
+.footer-bear img { width: 100%; height: 100%; object-fit: contain; }
+.footer-prints {
+  display: flex;
+  align-items: flex-end;
+  margin-left: 6px;
+}
+.footer-prints .bear-print {
+  display: block;
+  width: 20px;
+  height: 20px;
+  color: var(--accent-3);
+  opacity: 0.7;
+}
+.footer-prints .bear-print svg { width: 100%; height: 100%; transform: rotate(90deg); }
+.footer-prints .bear-print:nth-child(odd) { transform: translateY(-4px); }
+.footer-prints .bear-print:nth-child(odd) svg { transform: rotate(82deg); }
+.footer-prints .bear-print:nth-child(even) svg { transform: rotate(98deg); }
+.footer-prints .bear-print:nth-child(1) { margin-right: 4px; }
+.footer-prints .bear-print:nth-child(2) { margin-right: 8px; }
+.footer-prints .bear-print:nth-child(3) { margin-right: 14px; }
+.footer-prints .bear-print:nth-child(4) { margin-right: 20px; }
+.footer-prints .bear-print:nth-child(5) { margin-right: 28px; }
+.footer-prints .bear-print:nth-child(6) { margin-right: 36px; }
+
 .footer-inner {
   display: flex;
   justify-content: space-between;
@@ -564,6 +560,10 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 .site-footer a { color: #FAF6F0; text-decoration: underline; }
 .site-footer .footer-note { max-width: 46ch; font-size: 0.88rem; opacity: 0.9; }
 .site-footer .copyright { font-size: 0.78rem; opacity: 0.75; margin-top: 1.4rem; }
+
+@media (max-width: 640px) {
+  .footer-prints .bear-print:nth-child(n+6) { display: none; }
+}
 
 /* ===================== PAINT BUCKET TOGGLE ===================== */
 .bucket-toggle {

@@ -61,11 +61,9 @@
     <div class="home-about-grid">
       <section id="home" class="hero-half">
         <span class="section-kicker enter-piece hero-kicker">Welcome</span>
-        <p class="enter-piece hero-lead">
-          Tansi, I'm Sallee Icy Schaerer — a Métis artist and designer working across painting,
-          digital design, and handmade craft. This is a home for my creative work and my
-          professional work, side by side.
-        </p>
+        <figure class="hero-portrait enter-piece">
+          <img src="assets/images/portrait.svg" alt="Portrait photo placeholder — replace with Sallee's photo">
+        </figure>
         <div class="hero-actions enter-piece">
           <a href="#art" class="btn btn-solid">View my art</a>
           <a href="#about" class="btn">About me</a>
@@ -337,12 +335,29 @@
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-note">
-      <p>All artwork, text, and designs on this site belong to Sallee Icy Schaerer unless otherwise stated. Please do not reproduce, redistribute, use without written permission, or use in AI training or generative datasets.</p>
-      <p>For inquiries, questions, or commissions, reach out here: <a href="mailto:salleeschaerer@gmail.com">salleeschaerer@gmail.com</a></p>
+  <div class="container">
+    <div class="footer-track reveal" aria-hidden="true">
+      <div class="footer-bear">
+        <img src="assets/images/bear-trail.png" alt="">
+      </div>
+      <div class="footer-prints">
+        <span class="bear-print"><svg viewBox="0 0 100 100"><use href="assets/icons/bear-print.svg#"></use></svg></span>
+        <span class="bear-print"><svg viewBox="0 0 100 100"><use href="assets/icons/bear-print.svg#"></use></svg></span>
+        <span class="bear-print"><svg viewBox="0 0 100 100"><use href="assets/icons/bear-print.svg#"></use></svg></span>
+        <span class="bear-print"><svg viewBox="0 0 100 100"><use href="assets/icons/bear-print.svg#"></use></svg></span>
+        <span class="bear-print"><svg viewBox="0 0 100 100"><use href="assets/icons/bear-print.svg#"></use></svg></span>
+        <span class="bear-print"><svg viewBox="0 0 100 100"><use href="assets/icons/bear-print.svg#"></use></svg></span>
+        <span class="bear-print"><svg viewBox="0 0 100 100"><use href="assets/icons/bear-print.svg#"></use></svg></span>
+      </div>
     </div>
-    <div class="copyright">© <span id="footer-year"></span> Sallee Icy Schaerer. All rights reserved.</div>
+
+    <div class="footer-inner">
+      <div class="footer-note">
+        <p>All artwork, text, and designs on this site belong to Sallee Icy Schaerer unless otherwise stated. Please do not reproduce, redistribute, use without written permission, or use in AI training or generative datasets.</p>
+        <p>For inquiries, questions, or commissions, reach out here: <a href="mailto:salleeschaerer@gmail.com">salleeschaerer@gmail.com</a></p>
+      </div>
+      <div class="copyright">© <span id="footer-year"></span> Sallee Icy Schaerer. All rights reserved.</div>
+    </div>
   </div>
 </footer>
 
@@ -373,7 +388,6 @@
 </div>
 
 <script src="js/main.js" defer></script>
-<script src="js/footprints.js" defer></script>
 <script src="js/theme.js" defer></script>
 <script src="js/gallery.js" defer></script>
 <script src="js/search.js" defer></script>

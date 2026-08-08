@@ -6,6 +6,7 @@ Three are already real: `orca-2026.jpg` ("Orca 2026"), `mural-signals-flow.jpg` 
 
 | File | Used for | Suggested aspect ratio |
 |---|---|---|
+| `portrait.svg` | Homepage portrait photo | ~4:3 |
 | `orca-2026.jpg` | "Orca 2026" acrylic painting | square-ish — real image in place |
 | `mural-signals-flow.jpg` | "Where Signals Flow Like Water" mural (panoramic, horizontal-scroll) | very wide — real image in place |
 | `ucalgary-resource-page.jpg` | UCalgary Indigenous Student Resource Page project | portrait poster — real image in place |
@@ -13,9 +14,9 @@ Three are already real: `orca-2026.jpg` ("Orca 2026"), `mural-signals-flow.jpg` 
 | `handmade-jewelry.svg` | Handmade Creations — jewelry item | 1:1 square |
 | `handmade-dreamcatcher.svg` | Handmade Creations — dream catcher | 1:1 square |
 | `handmade-other.svg` | Handmade Creations — other item | 1:1 square |
-| `bear-trail.png` | The bear illustration at the bottom of the right-edge print trail (referenced from `js/footprints.js`, not `index.html`) — real image in place, transparent background | ~3:2, transparent background |
+| `bear-trail.png` | The bear illustration in the footer, bottom-left, followed by its footprints — real image in place, transparent background | ~3:2, transparent background |
 
-Note: there's no more homepage featured-artwork image and no About Me portrait — both are text-only now, per Sallee's request to remove them (no photo of herself will be submitted).
+Note: the homepage now has a portrait placeholder (`portrait.svg`) where the featured-artwork image used to be — Sallee wants space reserved for her portrait there, but hasn't sent one yet.
 
 You can add more handmade/art pieces by copying an existing `<article class="flip-card">` block in `index.html`, giving it a new image filename, and dropping the matching file in here.
 
