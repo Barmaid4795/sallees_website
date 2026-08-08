@@ -328,7 +328,7 @@ html:not(.fine-pointer) .tap-hint { display: block; }
   -webkit-overflow-scrolling: touch;
 }
 .mural-scroll img {
-  height: 260px;
+  height: 320px;
   width: auto;
   max-width: none;
   display: block;
