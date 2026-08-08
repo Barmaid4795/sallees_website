@@ -544,15 +544,15 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   position: absolute;
   top: 0;
   right: 0;
-  width: 76px;
+  width: 50px;
   height: 100%;
   pointer-events: none;
   z-index: 3;
 }
 .bear-print {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 16px;
+  height: 16px;
   opacity: 0;
   transform: rotate(var(--rot, 0deg)) scale(0.45);
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -562,6 +562,18 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   transform: rotate(var(--rot, 0deg)) scale(1);
 }
 .bear-print svg { width: 100%; height: 100%; color: var(--accent-5); }
+
+.bear-trail-anchor {
+  position: absolute;
+  right: -8px;
+  width: 92px;
+  height: 92px;
+  opacity: 0;
+  transform: translateY(10px) scale(0.85);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.bear-trail-anchor.is-visible { opacity: 0.9; transform: translateY(0) scale(1); }
+.bear-trail-anchor img { width: 100%; height: 100%; object-fit: contain; }
 
 @media (max-width: 640px) {
   .footprint-rail { display: none; }

@@ -13,13 +13,13 @@ Every image on the site is a plain abstract SVG placeholder living in this folde
 | `handmade-jewelry.svg` | Handmade Creations — jewelry item | 1:1 square |
 | `handmade-clothing.svg` | Handmade Creations — clothing item | 1:1 square |
 | `handmade-other.svg` | Handmade Creations — other item | 1:1 square |
+| `bear-trail.svg` | The bear illustration at the bottom of the right-edge print trail (referenced from `js/footprints.js`, not `index.html`) | roughly square, transparent background works best |
 
-You can add more handmade/art pieces by copying an existing `<article class="art-card">` or `<article class="handmade-card">` block in `index.html`, giving it a new image filename, and dropping the matching file in here.
+You can add more handmade/art pieces by copying an existing `<article class="flip-card">` block in `index.html`, giving it a new image filename, and dropping the matching file in here.
 
 ## Links still needed
 Search `index.html` for `href="#"` with a `data-todo` attribute — these mark placeholder links waiting on real URLs:
 - Mural project page/link
 - Academic Turnaround Program project link
-- Other Projects/Media collaboration links
 
-Already wired up: the UCalgary interview video link and the Indigenous Academic & Student Resources page link (both in the Art & Design UCalgary card and the Projects/Media section).
+Already wired up: the UCalgary interview video link and the Indigenous Academic & Student Resources page link (both on the Art & Design UCalgary card's flip side).

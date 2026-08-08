@@ -9,17 +9,19 @@
   function build() {
     rail.innerHTML = "";
     var totalHeight = document.documentElement.scrollHeight;
+    var footer = document.querySelector(".site-footer");
+    var footerTop = footer ? footer.getBoundingClientRect().top + window.scrollY : totalHeight;
     var startY = Math.min(window.innerHeight * 0.85, 700);
-    var endY = totalHeight - 260;
+    var endY = footerTop - 70; // stop the trail before it reaches the footer
     var y = startY;
     var i = 0;
     var prints = [];
 
     while (y < endY) {
       var progress = y / totalHeight;
-      var gap = 78 + progress * progress * 220; // tight "walking" steps widen into "running" strides
+      var gap = 56 + progress * progress * 160; // tight "walking" steps widen into "running" strides
       var side = i % 2 === 0 ? 1 : -1;
-      var rightOffset = 14 + (side === 1 ? 0 : 22);
+      var rightOffset = 10 + (side === 1 ? 0 : 14);
       var rotate = side === 1 ? -16 : 16;
 
       var el = document.createElement("span");
@@ -35,6 +37,15 @@
       y += gap;
       i++;
     }
+
+    // Reserve a spot for a real bear photo/illustration at the end of the trail
+    var anchor = document.createElement("span");
+    anchor.className = "bear-trail-anchor";
+    anchor.style.top = Math.min(y, endY) + "px";
+    anchor.innerHTML = '<img src="assets/images/bear-trail.svg" alt="A bear, following its tracks">';
+    rail.appendChild(anchor);
+    prints.push(anchor);
+
     return prints;
   }
 

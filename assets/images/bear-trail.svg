@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="Placeholder bear illustration">
+  <ellipse cx="100" cy="185" rx="60" ry="8" fill="#1A1A1A" opacity="0.12"/>
+  <g fill="#C9793B" stroke="#FFFDF9" stroke-width="3">
+    <ellipse cx="55" cy="140" rx="16" ry="34"/>
+    <ellipse cx="150" cy="140" rx="16" ry="34"/>
+    <ellipse cx="60" cy="168" rx="13" ry="9"/>
+    <ellipse cx="145" cy="168" rx="13" ry="9"/>
+    <ellipse cx="100" cy="110" rx="58" ry="46"/>
+    <circle cx="52" cy="66" r="15"/>
+    <circle cx="128" cy="60" r="20"/>
+    <circle cx="140" cy="88" r="16"/>
+    <circle cx="150" cy="90" r="6" fill="#2c1f10" stroke="none"/>
+  </g>
+  <text x="50%" y="97%" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#1A1A1A" opacity="0.55">Bear illustration — placeholder</text>
+</svg>
