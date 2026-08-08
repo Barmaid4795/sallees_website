@@ -34,16 +34,30 @@
 
   if (!overlay || !panel) return;
 
+  function makePanel(charId, speaker, line, reverse) {
+    var wrap = document.createElement("div");
+    wrap.className = reverse ? "comic-panel reverse" : "comic-panel";
+
+    var fig = document.createElement("div");
+    fig.className = "comic-figure";
+    fig.innerHTML = '<svg><use href="assets/icons/ama-characters.svg#' + charId + '"></use></svg>';
+
+    var bubble = document.createElement("div");
+    bubble.className = "speech-bubble";
+    var strong = document.createElement("strong");
+    strong.textContent = speaker + ":";
+    bubble.appendChild(strong);
+    bubble.appendChild(document.createTextNode(" " + line));
+
+    wrap.appendChild(fig);
+    wrap.appendChild(bubble);
+    return wrap;
+  }
+
   function buildPanel(question, answer) {
-    panel.innerHTML =
-      '<div class="comic-panel">' +
-        '<div class="comic-figure"><svg><use href="assets/icons/ama-characters.svg#char-fox"></use></svg></div>' +
-        '<div class="speech-bubble"><strong>Fox:</strong> ' + question + "</div>" +
-      "</div>" +
-      '<div class="comic-panel reverse">' +
-        '<div class="comic-figure"><svg><use href="assets/icons/ama-characters.svg#char-owl"></use></svg></div>' +
-        '<div class="speech-bubble"><strong>Owl:</strong> ' + answer + "</div>" +
-      "</div>";
+    panel.innerHTML = "";
+    panel.appendChild(makePanel("char-fox", "Fox", question, false));
+    panel.appendChild(makePanel("char-bear", "Bear", answer, true));
   }
 
   function openModal(question, answer) {

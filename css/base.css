@@ -7,12 +7,20 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  position: relative;
+  background:
+    radial-gradient(620px 520px at 92% 2%, color-mix(in srgb, var(--accent-3) 32%, transparent), transparent 70%),
+    radial-gradient(520px 460px at -6% 24%, color-mix(in srgb, var(--accent-4) 30%, transparent), transparent 70%),
+    radial-gradient(620px 520px at 100% 52%, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 70%),
+    radial-gradient(560px 480px at -4% 78%, color-mix(in srgb, var(--accent-5) 18%, transparent), transparent 70%),
+    radial-gradient(600px 500px at 96% 98%, color-mix(in srgb, var(--accent-1) 22%, transparent), transparent 70%),
+    var(--bg);
+  background-repeat: no-repeat;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 17px;
   line-height: 1.6;
-  transition: background var(--transition-med), color var(--transition-med);
+  transition: background-color var(--transition-med), color var(--transition-med);
   overflow-x: hidden;
 }
 
@@ -21,7 +29,7 @@ html.fine-pointer body,
 html.fine-pointer a,
 html.fine-pointer button,
 html.fine-pointer [role="button"] {
-  cursor: url("../assets/icons/cursor-paintbrush.svg") 4 28, auto;
+  cursor: url("../assets/icons/cursor-paintbrush.svg") 30 30, auto;
 }
 
 h1, h2, h3, h4 {
@@ -49,18 +57,39 @@ img { max-width: 100%; display: block; }
 }
 
 .section {
-  padding: 96px 0 72px;
-  border-top: 1px solid var(--border);
+  padding: 64px 0;
+}
+
+.section-card {
+  position: relative;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 60px -40px var(--shadow);
+  padding: clamp(2rem, 5vw, 3.6rem);
+}
+.section-card::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 40px;
+  right: 40px;
+  height: 8px;
+  background-image: radial-gradient(circle, var(--section-accent, var(--accent-1)) 3px, transparent 3.4px);
+  background-size: 20px 8px;
+  background-repeat: repeat-x;
+  opacity: 0.8;
 }
 
 .section-head { max-width: 720px; margin-bottom: 2.5rem; }
 .section-kicker {
   display: inline-block;
   font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-1);
+  color: var(--section-accent, var(--accent-1));
   margin-bottom: 0.6rem;
 }
 

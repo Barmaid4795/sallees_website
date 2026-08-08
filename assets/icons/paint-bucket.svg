@@ -1,12 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
   <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M14 26 L30 10 L54 34 L38 50 Z" fill="var(--bucket-fill, #5D51A1)" stroke="currentColor"/>
-    <path d="M14 26 L38 50 L10 50 C7 50 6 47 8 45 Z" fill="var(--bucket-fill, #5D51A1)"/>
-    <path d="M30 10 L26 6" />
-    <circle cx="24" cy="4" r="2.5" fill="currentColor" stroke="none"/>
+    <path d="M14 24 C14 20 19 17 26 17 C33 17 38 20 38 24 L36 50 C36 53 31.5 55 26 55 C20.5 55 16 53 16 50 Z" fill="var(--bucket-fill, #5D51A1)"/>
+    <path d="M14 24 C14 27.5 19.4 30 26 30 C32.6 30 38 27.5 38 24" fill="none"/>
+    <path d="M18.5 19 C18.5 13 22 8 26 8 C30 8 33.5 13 33.5 19" />
+  </g>
+  <g fill="var(--bucket-fill, #5D51A1)" stroke="none">
+    <path d="M38 22 C46 18 52 22 54 16 C56 22 52 30 44 30 C40.5 30 38 27 38 24 Z"/>
   </g>
   <g class="bucket-drip" fill="var(--bucket-fill, #5D51A1)" stroke="none">
-    <circle cx="46" cy="46" r="2.4"/>
-    <circle cx="51" cy="52" r="1.6"/>
+    <circle cx="47" cy="38" r="2.6"/>
+    <circle cx="52" cy="45" r="1.7"/>
   </g>
 </svg>

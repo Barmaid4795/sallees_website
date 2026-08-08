@@ -29,7 +29,6 @@
       <li><a href="#about">About Me</a></li>
       <li><a href="#art">Art &amp; Design</a></li>
       <li><a href="#handmade">Handmade Creations</a></li>
-      <li><a href="#projects">Projects / Media</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
 
@@ -49,7 +48,6 @@
   <a href="#about">About Me</a>
   <a href="#art">Art &amp; Design</a>
   <a href="#handmade">Handmade Creations</a>
-  <a href="#projects">Projects / Media</a>
   <a href="#ama">Ask Me Anything</a>
   <a href="#contact">Contact</a>
 </nav>
@@ -78,15 +76,9 @@
     </figure>
   </section>
 
-  <div class="footprint-trail hero-print enter-piece" aria-hidden="true">
-    <svg viewBox="0 0 100 100"><use href="assets/icons/paw-print.svg#"></use></svg>
-    <svg viewBox="0 0 100 100"><use href="assets/icons/paw-print.svg#"></use></svg>
-    <svg viewBox="0 0 100 100"><use href="assets/icons/paw-print.svg#"></use></svg>
-    <svg viewBox="0 0 100 100"><use href="assets/icons/paw-print.svg#"></use></svg>
-  </div>
-
   <!-- ============ ABOUT ============ -->
   <section id="about" class="section container reveal">
+   <div class="section-card">
     <div class="about-grid">
       <figure class="about-portrait">
         <img src="assets/images/portrait.svg" alt="Portrait photo placeholder — replace with Sallee's photo">
@@ -125,14 +117,16 @@
         </p>
       </div>
     </div>
+   </div>
   </section>
 
   <!-- ============ ART & DESIGN ============ -->
   <section id="art" class="section container reveal">
+   <div class="section-card">
     <div class="section-head">
       <span class="section-kicker">Art &amp; Design</span>
       <h2>Paintings, digital art, murals &amp; design work</h2>
-      <p class="muted">Hover a piece (or tap, on mobile) to flip it and read the details. Every piece includes its medium, date, and dimensions.</p>
+      <p class="muted">Just the art up front — hover a piece (or tap, on mobile) to flip it and read the story, links, medium, date, and dimensions.</p>
     </div>
 
     <div class="filter-row art-filters" role="group" aria-label="Filter artwork by medium">
@@ -150,47 +144,43 @@
         <div class="flip-card-inner">
           <div class="flip-face flip-front">
             <img src="assets/images/orca-2026.svg" alt="Orca 2026 — acrylic painting, placeholder image">
-            <div class="card-label">
-              <span class="medium-tag">Acrylic Painting</span>
+            <div class="flip-front-scrim">
               <h3>Orca 2026</h3>
+              <span class="tap-hint">Tap to flip</span>
             </div>
           </div>
           <div class="flip-face flip-back">
             <div>
               <h3>Orca 2026</h3>
-              <p class="meta"><span>2026</span><span>Acrylic on canvas</span><span>Dimensions TBD</span></p>
+              <p class="meta"><span>Acrylic Painting</span><span>2026</span><span>Acrylic on canvas</span><span>Dimensions TBD</span></p>
               <p class="desc">"What the Water Carries."</p>
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer. Not for reproduction without permission.</p>
           </div>
-          <div class="tap-hint">Tap to flip</div>
         </div>
       </article>
 
-      <article id="art-mural" class="flip-card" style="display:none" data-medium="mural"></article>
-
       <article id="art-ucalgary" class="flip-card" data-medium="digital"
         data-search-title="UCalgary Indigenous Student Resource Page" data-search-medium="Design / branding"
-        data-search-project="Walking Parallel Paths Initiative" data-search-keywords="logo banner ucalgary indigenous student resource">
+        data-search-project="Walking Parallel Paths Initiative" data-search-keywords="logo banner ucalgary indigenous student resource interview">
         <div class="flip-card-inner">
           <div class="flip-face flip-front">
             <img src="assets/images/ucalgary-resource-page.svg" alt="UCalgary Indigenous Student Resource Page design, placeholder image">
-            <div class="card-label">
-              <span class="medium-tag">Design</span>
+            <div class="flip-front-scrim">
               <h3>UCalgary Indigenous Student Resource Page</h3>
+              <span class="tap-hint">Tap to flip</span>
             </div>
           </div>
           <div class="flip-face flip-back">
             <div>
               <h3>UCalgary Indigenous Student Resource Page</h3>
-              <p class="meta"><span>2025</span><span>Logos &amp; banners</span><span>Digital design</span></p>
+              <p class="meta"><span>Design</span><span>2025</span><span>Logos &amp; banners</span></p>
               <p class="desc">Logos and banners designed for the University of Calgary's Indigenous Student Resource Page, part of the Walking Parallel Paths Initiative.</p>
               <a class="btn" href="https://yuja.ucalgary.ca/V/Video?v=1137399&amp;node=6251422&amp;a=31844361&amp;_gl=1*1fw9bwh*_gcl_au*MTQ2NTE0MDQ2MS4xNzg0MTQzMjk1Li0uLS4xNzg0NzUyNzA0LjM4NjMyNTk5NC4xNzg0NzUyNzA0LjE3ODQ3NTI3MDk.*_ga*MTQ5ODk1Mzc2Mi4xNzg0MTQyNDAz*_ga_Q9BHJZ8QG1*czE3ODYxNjEwNjIkbzMkZzAkdDE3ODYxNjEwODckajM1JGwwJGgw" target="_blank" rel="noopener">Watch my interview here</a>
               <a class="btn" href="https://ucalgary.ca/student-services/student-success/learning/indigenous-academic-and-student-resources" target="_blank" rel="noopener">View the resource page</a>
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer. Not for reproduction without permission.</p>
           </div>
-          <div class="tap-hint">Tap to flip</div>
         </div>
       </article>
 
@@ -200,9 +190,9 @@
         <div class="flip-card-inner">
           <div class="flip-face flip-front">
             <img src="assets/images/academic-turnaround.svg" alt="Academic Turnaround Program workbook design, placeholder image">
-            <div class="card-label">
-              <span class="medium-tag">Workbook Designs and Infographics</span>
+            <div class="flip-front-scrim">
               <h3>Academic Turnaround Program at UCalgary</h3>
+              <span class="tap-hint">Tap to flip</span>
             </div>
           </div>
           <div class="flip-face flip-back">
@@ -214,7 +204,6 @@
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer. Not for reproduction without permission.</p>
           </div>
-          <div class="tap-hint">Tap to flip</div>
         </div>
       </article>
     </div>
@@ -228,13 +217,17 @@
       </div>
       <figcaption class="mural-caption">
         <span><strong>Where Signals Flow Like Water</strong> — mural / digital art · Dimensions TBD</span>
-        <span class="scroll-hint">Scroll horizontally to view the full piece →</span>
+        <a class="btn" href="#" data-todo>View mural project</a>
       </figcaption>
     </figure>
+
+    <p class="muted" style="margin-top:1.6rem; text-align:center;">More collaborations, interviews, and projects coming soon.</p>
+   </div>
   </section>
 
   <!-- ============ HANDMADE CREATIONS ============ -->
   <section id="handmade" class="section container reveal">
+   <div class="section-card">
     <div class="section-head">
       <span class="section-kicker">Handmade Creations</span>
       <h2>Jewelry, clothing &amp; other handmade pieces</h2>
@@ -245,16 +238,19 @@
         <div class="flip-card-inner">
           <div class="flip-face flip-front">
             <img src="assets/images/handmade-jewelry.svg" alt="Handmade jewelry piece, placeholder image">
-            <div class="card-label"><span class="medium-tag">Jewelry</span><h3>Beaded Pendant Necklace</h3></div>
+            <div class="flip-front-scrim">
+              <h3>Beaded Pendant Necklace</h3>
+              <span class="tap-hint">Tap to flip</span>
+            </div>
           </div>
           <div class="flip-face flip-back">
             <div>
               <h3>Beaded Pendant Necklace</h3>
+              <p class="meta"><span>Jewelry</span></p>
               <p class="desc">A hand-beaded pendant necklace, made using traditional beadwork techniques.</p>
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer.</p>
           </div>
-          <div class="tap-hint">Tap to flip</div>
         </div>
       </article>
 
@@ -262,16 +258,19 @@
         <div class="flip-card-inner">
           <div class="flip-face flip-front">
             <img src="assets/images/handmade-clothing.svg" alt="Handmade clothing piece, placeholder image">
-            <div class="card-label"><span class="medium-tag">Clothing</span><h3>Hand-Sewn Ribbon Skirt</h3></div>
+            <div class="flip-front-scrim">
+              <h3>Hand-Sewn Ribbon Skirt</h3>
+              <span class="tap-hint">Tap to flip</span>
+            </div>
           </div>
           <div class="flip-face flip-back">
             <div>
               <h3>Hand-Sewn Ribbon Skirt</h3>
+              <p class="meta"><span>Clothing</span></p>
               <p class="desc">A hand-sewn ribbon skirt, made with care and attention to traditional style.</p>
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer.</p>
           </div>
-          <div class="tap-hint">Tap to flip</div>
         </div>
       </article>
 
@@ -279,68 +278,28 @@
         <div class="flip-card-inner">
           <div class="flip-face flip-front">
             <img src="assets/images/handmade-other.svg" alt="Other handmade creation, placeholder image">
-            <div class="card-label"><span class="medium-tag">Handmade</span><h3>Woven Keepsake Basket</h3></div>
+            <div class="flip-front-scrim">
+              <h3>Woven Keepsake Basket</h3>
+              <span class="tap-hint">Tap to flip</span>
+            </div>
           </div>
           <div class="flip-face flip-back">
             <div>
               <h3>Woven Keepsake Basket</h3>
+              <p class="meta"><span>Handmade</span></p>
               <p class="desc">A small woven keepsake basket, handmade as a one-of-a-kind piece.</p>
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer.</p>
           </div>
-          <div class="tap-hint">Tap to flip</div>
         </div>
       </article>
     </div>
-  </section>
-
-  <!-- ============ PROJECTS / MEDIA ============ -->
-  <section id="projects" class="section container reveal">
-    <div class="section-head">
-      <span class="section-kicker">Projects / Media</span>
-      <h2>Collaborations, links &amp; interviews</h2>
-    </div>
-
-    <div class="media-grid">
-      <article class="media-card" data-todo
-        data-search-title="Where Signals Flow Like Water — mural link" data-search-project="Mural" data-search-keywords="mural link project">
-        <span class="tag">Mural</span>
-        <h3>Where Signals Flow Like Water</h3>
-        <p class="muted">Link to the full mural project page.</p>
-        <a class="btn" href="#" data-todo>Visit mural page</a>
-        <span class="todo-flag">Link coming soon</span>
-      </article>
-
-      <article class="media-card"
-        data-search-title="Walking Parallel Paths Initiative interview" data-search-project="UCalgary Indigenous Student Resource Page"
-        data-search-keywords="interview video ucalgary indigenous student resource walking parallel paths">
-        <span class="tag">Interview</span>
-        <h3>Exploring Art on the SSC Indigenous Academic Support Page</h3>
-        <p class="muted">Interview with student artist Sallee Schaerer about the design work for the Walking Parallel Paths Initiative.</p>
-        <a class="btn" href="https://yuja.ucalgary.ca/V/Video?v=1137399&amp;node=6251422&amp;a=31844361&amp;_gl=1*1fw9bwh*_gcl_au*MTQ2NTE0MDQ2MS4xNzg0MTQzMjk1Li0uLS4xNzg0NzUyNzA0LjM4NjMyNTk5NC4xNzg0NzUyNzA0LjE3ODQ3NTI3MDk.*_ga*MTQ5ODk1Mzc2Mi4xNzg0MTQyNDAz*_ga_Q9BHJZ8QG1*czE3ODYxNjEwNjIkbzMkZzAkdDE3ODYxNjEwODckajM1JGwwJGgw" target="_blank" rel="noopener">Watch interview</a>
-      </article>
-
-      <article class="media-card"
-        data-search-title="UCalgary Indigenous Academic and Student Resources" data-search-project="Indigenous Student Resource Page"
-        data-search-keywords="banner logo ucalgary indigenous academic student resources design">
-        <span class="tag">Design</span>
-        <h3>Indigenous Academic &amp; Student Resources Page</h3>
-        <p class="muted">The live UCalgary page featuring the logos and banners Sallee designed.</p>
-        <a class="btn" href="https://ucalgary.ca/student-services/student-success/learning/indigenous-academic-and-student-resources" target="_blank" rel="noopener">View page</a>
-      </article>
-
-      <article class="media-card" data-todo
-        data-search-title="More collaborations" data-search-keywords="collaboration project link">
-        <span class="tag">Collaboration</span>
-        <h3>More to come</h3>
-        <p class="muted">Additional collaborations, published work, and links will be added here.</p>
-        <span class="todo-flag">Link coming soon</span>
-      </article>
-    </div>
+   </div>
   </section>
 
   <!-- ============ ASK ME ANYTHING ============ -->
   <section id="ama" class="section container reveal">
+   <div class="section-card">
     <div class="section-head">
       <span class="section-kicker">Ask Me Anything</span>
       <h2>Curious about something? Ask away.</h2>
@@ -360,13 +319,16 @@
       <input id="ama-custom-input" type="text" placeholder="Ask your own question…">
       <button type="submit" class="btn btn-solid">Ask</button>
     </form>
+   </div>
   </section>
 
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="section container reveal">
+   <div class="section-card">
     <div class="section-head">
       <span class="section-kicker">Contact</span>
       <h2>Contact Me</h2>
+      <p class="muted">Fill out the form below to contact me, or email me directly at <a href="mailto:salleeschaerer@gmail.com">salleeschaerer@gmail.com</a>. For inquiries, questions, or commissions, reach out here — I'd love to hear from you.</p>
     </div>
 
     <div class="contact-wrap">
@@ -392,6 +354,7 @@
         <p class="muted">Open to art and creative opportunities, Indigenous-related opportunities, and other professional opportunities.</p>
       </div>
     </div>
+   </div>
   </section>
 
 </main>
@@ -434,6 +397,7 @@
 </div>
 
 <script src="js/main.js" defer></script>
+<script src="js/footprints.js" defer></script>
 <script src="js/theme.js" defer></script>
 <script src="js/gallery.js" defer></script>
 <script src="js/search.js" defer></script>
