@@ -14,7 +14,7 @@
   });
 
   // Mild deterrent against casual right-click-save/drag of artwork — not a real security measure
-  document.querySelectorAll(".flip-front img, .hero-art img, .mural-scroll img, .about-portrait img").forEach(function (img) {
+  document.querySelectorAll(".flip-front img, .mural-scroll img").forEach(function (img) {
     img.setAttribute("draggable", "false");
     img.addEventListener("contextmenu", function (e) { e.preventDefault(); });
   });

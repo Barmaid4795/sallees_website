@@ -61,7 +61,7 @@ a { color: var(--accent-1); text-decoration: none; }
 img { max-width: 100%; display: block; }
 
 /* mild deterrent against casual right-click/drag saving of artwork — not a real security measure */
-.flip-front img, .hero-art img, .mural-scroll img, .about-portrait img {
+.flip-front img, .mural-scroll img {
   -webkit-user-drag: none;
   user-drag: none;
   -webkit-touch-callout: none;

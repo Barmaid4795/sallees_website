@@ -12,8 +12,9 @@ html:not(.loaded) .enter-piece { opacity: 0; }
 
 html.loaded .site-nav { animation-delay: 0.05s; }
 html.loaded .hero-kicker { animation-delay: 0.35s; }
-html.loaded .hero-copy p { animation-delay: 0.6s; }
+html.loaded .hero-lead { animation-delay: 0.6s; }
 html.loaded .hero-actions { animation-delay: 0.95s; }
+html.loaded .about-half { animation-delay: 1.15s; }
 html.loaded .bucket-toggle { animation-delay: 1.9s; }
 
 @keyframes fallIntoPlace {
@@ -32,8 +33,9 @@ html.loaded .bucket-toggle { animation-delay: 1.9s; }
 
 .site-nav { --fy: -100%; --fr: 0deg; }
 .hero-kicker { --fx: -40px; --fy: 0; }
-.hero-copy p { --fx: -40px; --fy: 10px; --fr: -1.5deg; }
+.hero-lead { --fx: -40px; --fy: 10px; --fr: -1.5deg; }
 .hero-actions { --fx: -20px; }
+.about-half { --fx: 40px; --fr: 1.5deg; }
 .bucket-toggle { --fy: 40px; --fr: 12deg; }
 
 @media (max-width: 640px) {

@@ -117,37 +117,25 @@
   border-left-color: var(--nav-accent, var(--accent-2));
 }
 
-/* ===================== HERO ===================== */
-.hero {
-  min-height: 72svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: calc(var(--nav-height) + 40px) 0 60px;
+/* ===================== HOME + ABOUT (side by side) ===================== */
+.home-about-card {
+  margin-top: calc(var(--nav-height) + 32px);
 }
-.hero-copy { max-width: 640px; }
-.hero-copy .section-kicker { margin-bottom: 1rem; }
-.hero-lead {
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
-  line-height: 1.35;
-  max-width: 32ch;
-}
-.hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 1.6rem; }
-
-/* ===================== ABOUT ===================== */
-.about-grid {
+.home-about-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: start;
 }
-.about-portrait {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--art-bg);
-  border: 1px solid var(--art-border);
+.hero-half .section-kicker { margin-bottom: 1rem; }
+.hero-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--accent-1) 42%, var(--text) 58%);
 }
+.hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 1.6rem; }
+
 .greeting {
   font-family: var(--font-display);
   font-size: 1.4rem;
@@ -169,7 +157,7 @@
   font-size: 0.88rem;
 }
 @media (max-width: 860px) {
-  .about-grid { grid-template-columns: 1fr; }
+  .home-about-grid { grid-template-columns: 1fr; gap: 2.4rem; }
 }
 
 /* ===================== FILTERS ===================== */
@@ -553,7 +541,10 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 .bear-trail-anchor img { width: 100%; height: 100%; object-fit: contain; }
 
 @media (max-width: 640px) {
-  .footprint-rail { display: none; }
+  /* keep the small paw-print trail desktop-only, but still show the bear itself */
+  .bear-print { display: none; }
+  .footprint-rail { width: 96px; }
+  .bear-trail-anchor { right: 6px; width: 90px; height: 62px; }
 }
 
 /* ===================== FOOTER ===================== */

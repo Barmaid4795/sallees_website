@@ -12,7 +12,7 @@
     var footer = document.querySelector(".site-footer");
     var footerTop = footer ? footer.getBoundingClientRect().top + window.scrollY : totalHeight;
     var startY = Math.min(window.innerHeight * 0.85, 700);
-    var endY = footerTop - 70; // stop the trail before it reaches the footer
+    var endY = footerTop - 110; // stop the trail well before it reaches the footer
     var y = startY;
     var i = 0;
     var prints = [];
