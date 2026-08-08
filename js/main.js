@@ -52,6 +52,17 @@
     sections.forEach(function (s) { navObserver.observe(s); });
   }
 
+  // Etsy shop link — not live yet, so clicking shows a quiet "coming soon" note instead
+  var etsyLink = document.getElementById("etsy-link");
+  var etsyNote = document.getElementById("etsy-note");
+  if (etsyLink && etsyNote) {
+    etsyLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      etsyNote.textContent = "Coming soon!";
+      etsyNote.classList.add("show");
+    });
+  }
+
   // Scroll-reveal for below-the-fold content
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && revealEls.length) {

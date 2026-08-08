@@ -29,7 +29,7 @@ html.fine-pointer body,
 html.fine-pointer a,
 html.fine-pointer button,
 html.fine-pointer [role="button"] {
-  cursor: url("../assets/icons/cursor-paintbrush.svg") 30 30, auto;
+  cursor: url("../assets/icons/cursor-paintbrush.svg") 8 8, auto;
 }
 
 h1, h2, h3, h4 {
@@ -98,6 +98,7 @@ img { max-width: 100%; display: block; }
 }
 
 .section-head { max-width: 720px; margin-bottom: 2.5rem; }
+.deco-host { position: relative; }
 .section-kicker {
   display: inline-block;
   font-family: var(--font-body);

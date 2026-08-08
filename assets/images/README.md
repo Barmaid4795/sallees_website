@@ -15,6 +15,10 @@ Three are already real: `orca-2026.jpg` ("Orca 2026"), `mural-signals-flow.jpg` 
 | `handmade-dreamcatcher.svg` | Handmade Creations — dream catcher | 1:1 square |
 | `handmade-other.svg` | Handmade Creations — other item | 1:1 square |
 | `bear-trail.png` | The bear illustration in the footer, bottom-left, followed by its footprints — real image in place, transparent background | ~3:2, transparent background |
+| `el-dragonfly.png` | Decorative accent perched on the homepage portrait frame | real image, transparent background |
+| `el-dotted-box.png` | Decorative frame peeking out behind the homepage portrait | real image, transparent background |
+| `el-berries.png` | Decorative accent above the Handmade Creations heading — recolored blue via a CSS `hue-rotate` filter (originally drawn pink/coral) | real image, transparent background |
+| `el-fish.png` | Extracted from Sallee's design-elements sheet but not placed anywhere yet — she didn't mention it in her notes, so it's sitting here pending confirmation on whether/where to use it | real image, transparent background |
 
 Note: the homepage now has a portrait placeholder (`portrait.svg`) where the featured-artwork image used to be — Sallee wants space reserved for her portrait there, but hasn't sent one yet.
 

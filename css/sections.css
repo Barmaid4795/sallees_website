@@ -128,7 +128,10 @@
   align-items: start;
 }
 .hero-half .section-kicker { margin-bottom: 1rem; }
+.hero-portrait-frame { position: relative; }
 .hero-portrait {
+  position: relative;
+  z-index: 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--art-bg);
@@ -136,7 +139,39 @@
   aspect-ratio: 4 / 3;
 }
 .hero-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.hero-deco-box {
+  position: absolute;
+  z-index: 0;
+  top: -16px;
+  left: -16px;
+  width: 62%;
+  opacity: 0.85;
+}
+.hero-deco-dragonfly {
+  position: absolute;
+  z-index: 2;
+  top: -34px;
+  right: -14px;
+  width: 76px;
+  transform: rotate(14deg);
+}
 .hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 1.6rem; }
+
+@media (max-width: 640px) {
+  .hero-deco-box, .hero-deco-dragonfly { display: none; }
+}
+
+.handmade-deco-berries {
+  position: absolute;
+  top: -6px;
+  right: 4px;
+  width: 92px;
+  filter: hue-rotate(200deg) saturate(1.3);
+  opacity: 0.92;
+}
+@media (max-width: 860px) {
+  .handmade-deco-berries { display: none; }
+}
 
 .greeting {
   font-family: var(--font-display);
@@ -499,11 +534,12 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 .form-status { font-size: 0.88rem; min-height: 1.4em; }
 .form-status.success { color: var(--accent-5); }
 .form-status.error { color: #b3452c; }
-.contact-direct {
-  border-left: 3px solid var(--accent-2);
+.contact-ama {
+  border-left: 3px solid var(--accent-1);
   padding-left: 1.2rem;
 }
-.contact-direct a { font-weight: 600; }
+.contact-ama h3 { margin-top: 0; font-size: 1.15rem; }
+.contact-ama .section-kicker { display: block; margin-bottom: 0.4rem; }
 @media (max-width: 860px) { .contact-wrap { grid-template-columns: 1fr; } }
 
 /* ===================== FOOTER ===================== */
@@ -522,33 +558,31 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   margin-bottom: 1.8rem;
 }
 .footer-bear {
-  width: 84px;
-  height: 58px;
+  width: 52px;
+  height: 36px;
   flex-shrink: 0;
 }
 .footer-bear img { width: 100%; height: 100%; object-fit: contain; }
 .footer-prints {
   display: flex;
   align-items: flex-end;
-  margin-left: 6px;
+  flex: 1;
+  margin-left: 4px;
+  min-width: 0;
 }
+.print-gap { flex-shrink: 1; }
 .footer-prints .bear-print {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
   color: var(--accent-3);
   opacity: 0.7;
 }
 .footer-prints .bear-print svg { width: 100%; height: 100%; transform: rotate(90deg); }
-.footer-prints .bear-print:nth-child(odd) { transform: translateY(-4px); }
-.footer-prints .bear-print:nth-child(odd) svg { transform: rotate(82deg); }
-.footer-prints .bear-print:nth-child(even) svg { transform: rotate(98deg); }
-.footer-prints .bear-print:nth-child(1) { margin-right: 4px; }
-.footer-prints .bear-print:nth-child(2) { margin-right: 8px; }
-.footer-prints .bear-print:nth-child(3) { margin-right: 14px; }
-.footer-prints .bear-print:nth-child(4) { margin-right: 20px; }
-.footer-prints .bear-print:nth-child(5) { margin-right: 28px; }
-.footer-prints .bear-print:nth-child(6) { margin-right: 36px; }
+.footer-prints .bear-print:nth-child(4n+1) { transform: translateY(-4px); }
+.footer-prints .bear-print:nth-child(4n+1) svg { transform: rotate(82deg); }
+.footer-prints .bear-print:nth-child(4n+3) svg { transform: rotate(98deg); }
 
 .footer-inner {
   display: flex;
@@ -560,10 +594,15 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 .site-footer a { color: #FAF6F0; text-decoration: underline; }
 .site-footer .footer-note { max-width: 46ch; font-size: 0.88rem; opacity: 0.9; }
 .site-footer .copyright { font-size: 0.78rem; opacity: 0.75; margin-top: 1.4rem; }
-
-@media (max-width: 640px) {
-  .footer-prints .bear-print:nth-child(n+6) { display: none; }
+.footer-etsy { margin-top: 0.6em; font-size: 0.78rem; opacity: 0.7; }
+.footer-etsy a { text-decoration: underline dotted; }
+.etsy-note {
+  margin-left: 0.6em;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
+.etsy-note.show { opacity: 0.9; }
 
 /* ===================== PAINT BUCKET TOGGLE ===================== */
 .bucket-toggle {
