@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 850" role="img" aria-label="Placeholder: Orca 2026, acrylic painting">
+  <defs>
+    <linearGradient id="og" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5D51A1"/>
+      <stop offset="55%" stop-color="#1A1A1A"/>
+      <stop offset="100%" stop-color="#4A6B53"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="850" fill="url(#og)"/>
+  <path d="M0 560 C 150 500 250 620 350 560 C 470 490 560 620 700 560 L700 850 L0 850 Z" fill="#F4A261" opacity="0.18"/>
+  <path d="M120 520 C 220 380 340 380 380 480 C 400 540 340 560 300 600 C 260 640 180 620 150 570 Z" fill="#FAF6F0" opacity="0.92"/>
+  <path d="M340 470 C 380 430 430 440 420 470 C 410 495 370 495 340 470 Z" fill="#FAF6F0" opacity="0.92"/>
+  <circle cx="200" cy="500" r="6" fill="#1A1A1A"/>
+  <text x="50%" y="97%" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#FAF6F0" opacity="0.8">Orca 2026 — placeholder</text>
+</svg>

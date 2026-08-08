@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 26 L30 10 L54 34 L38 50 Z" fill="var(--bucket-fill, #5D51A1)" stroke="currentColor"/>
+    <path d="M14 26 L38 50 L10 50 C7 50 6 47 8 45 Z" fill="var(--bucket-fill, #5D51A1)"/>
+    <path d="M30 10 L26 6" />
+    <circle cx="24" cy="4" r="2.5" fill="currentColor" stroke="none"/>
+  </g>
+  <g class="bucket-drip" fill="var(--bucket-fill, #5D51A1)" stroke="none">
+    <circle cx="46" cy="46" r="2.4"/>
+    <circle cx="51" cy="52" r="1.6"/>
+  </g>
+</svg>

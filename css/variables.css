@@ -1,0 +1,52 @@
+/* ============================================
+   Palette system
+   Default = warm multicolor palette (Sallee's brief)
+   Alternate = icy blue palette (invented — no hex codes were given,
+   review these and tweak to taste)
+   ============================================ */
+
+:root {
+  /* warm multicolor (default) */
+  --bg: #FAF6F0;
+  --surface: #FFFFFF;
+  --text: #1A1A1A;
+  --text-muted: #57524b;
+  --accent-1: #5D51A1; /* muted brand purple */
+  --accent-2: #F4A261; /* vibrant peach */
+  --accent-3: #E9C46A; /* warm ochre */
+  --accent-4: #F1A7B4; /* pastel rose pink */
+  --accent-5: #4A6B53; /* moss green */
+  --border: rgba(26, 26, 26, 0.12);
+  --shadow: rgba(26, 26, 26, 0.14);
+
+  /* artwork areas always sit on warm milk white, regardless of theme */
+  --art-bg: #FAF6F0;
+  --art-text: #1A1A1A;
+  --art-border: rgba(26, 26, 26, 0.1);
+
+  --bucket-fill: var(--accent-1);
+
+  --font-display: "Marcellus", "Cormorant Garamond", Georgia, serif;
+  --font-body: "Jost", "Avenir Next", Helvetica, Arial, sans-serif;
+
+  --nav-height: 76px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --transition-fast: 180ms ease;
+  --transition-med: 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme="icy"] {
+  --bg: #EAF4F8; /* invented light neutral — Sallee's swatches were accents only */
+  --surface: #FFFFFF;
+  --text: #16232B; /* invented dark neutral, for body-text contrast */
+  --text-muted: #4D6472;
+  --accent-1: #095f92; /* Sallee's icy palette */
+  --accent-2: #2f5288;
+  --accent-3: #a1d0fc;
+  --accent-4: #b6e5ed;
+  --accent-5: #243e7d;
+  --border: rgba(22, 35, 43, 0.12);
+  --shadow: rgba(22, 35, 43, 0.16);
+  --bucket-fill: var(--accent-1);
+}
