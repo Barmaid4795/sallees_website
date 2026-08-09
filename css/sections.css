@@ -128,7 +128,7 @@
   align-items: start;
 }
 .hero-half .section-kicker { margin-bottom: 1rem; }
-.hero-portrait-frame { position: relative; }
+.hero-portrait-frame { position: relative; max-width: 360px; }
 .hero-portrait {
   position: relative;
   z-index: 1;
@@ -136,7 +136,8 @@
   overflow: hidden;
   background: var(--art-bg);
   border: 1px solid var(--art-border);
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
+  max-width: 360px;
 }
 .hero-portrait img { width: 100%; height: 100%; object-fit: cover; }
 .hero-deco-box {
@@ -431,7 +432,6 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 }
 .comic-panel.reverse { grid-template-columns: 1fr 96px; transform: rotate(0.6deg); }
 .comic-panel.reverse .comic-figure { order: 2; }
-.comic-figure svg,
 .comic-figure img {
   width: 96px;
   height: 104px;

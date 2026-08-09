@@ -36,7 +36,7 @@ html.loaded .berry-toggle { animation-delay: 1.9s; }
 .hero-portrait-frame { --fy: -90px; --fr: 1deg; }
 .hero-actions { --fy: -40px; --fr: -1deg; }
 .about-half { --fy: -70px; --fr: 1deg; }
-.bucket-toggle { --fy: -50px; --fr: 8deg; }
+.berry-toggle { --fy: -50px; --fr: 8deg; }
 
 @media (max-width: 640px) {
   .enter-piece { animation-name: fadeOnly; animation-duration: 0.6s !important; }
@@ -44,6 +44,32 @@ html.loaded .berry-toggle { animation-delay: 1.9s; }
     from { opacity: 0; }
     to { opacity: 1; }
   }
+}
+
+/* =============================================
+   First-load berry rain — falls from the top and
+   lands near the bottom-left, echoing the footer bear
+   ============================================= */
+.berry-rain-drop {
+  position: fixed;
+  width: var(--size, 26px);
+  height: var(--size, 26px);
+  background-image: url("../assets/icons/berry-toggle.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: hue-rotate(200deg) saturate(1.4);
+  pointer-events: none;
+  z-index: 750;
+  opacity: 0;
+  animation: berryRain 1.3s cubic-bezier(0.4, 0, 0.75, 1) both;
+}
+@keyframes berryRain {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  8% { opacity: 1; }
+  68% { opacity: 1; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)); }
+  78% { transform: translate(var(--tx), calc(var(--ty) - 12px)) rotate(var(--tr)); }
+  90% { opacity: 1; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)); }
 }
 
 /* =============================================
@@ -68,19 +94,21 @@ html.loaded .berry-toggle { animation-delay: 1.9s; }
 }
 .berry-tumble {
   position: fixed;
-  width: 22px;
-  height: 22px;
+  width: var(--size, 46px);
+  height: var(--size, 46px);
   background-image: url("../assets/icons/berry-toggle.png");
   background-size: contain;
   background-repeat: no-repeat;
+  filter: hue-rotate(200deg) saturate(1.4);
   pointer-events: none;
   z-index: 750;
   opacity: 0;
-  animation: berryTumble 0.85s cubic-bezier(0.4, 0, 0.7, 1) forwards;
+  animation: berryTumble 1.3s cubic-bezier(0.33, 0, 0.55, 1) forwards;
 }
 @keyframes berryTumble {
   0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.5); }
-  12% { opacity: 1; }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
   100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)) scale(1); }
 }
 

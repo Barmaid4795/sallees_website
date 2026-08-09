@@ -7,14 +7,46 @@
   var isFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   html.classList.toggle("fine-pointer", isFinePointer);
 
-  // Trigger the first-load entrance animation
+  // First-load berry rain — falls from the top, lands bottom-left near the footer bear
+  function spawnBerryRain() {
+    var count = 22;
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
+    for (var i = 0; i < count; i++) {
+      var size = 20 + Math.random() * 26;
+      var startTop = -(size + Math.random() * 260);
+      var left = Math.random() * Math.min(vw * 0.9, vw - size);
+      var landY = vh - (36 + Math.random() * 70);
+      var drop = document.createElement("div");
+      drop.className = "berry-rain-drop";
+      drop.style.setProperty("--size", size + "px");
+      drop.style.left = left + "px";
+      drop.style.top = startTop + "px";
+      drop.style.setProperty("--ty", (landY - startTop) + "px");
+      drop.style.setProperty("--tx", Math.round(Math.random() * 60 - 30) + "px");
+      drop.style.setProperty("--tr", Math.round(Math.random() * 300 - 150) + "deg");
+      drop.style.animationDuration = (1.1 + Math.random() * 0.6) + "s";
+      drop.style.animationDelay = Math.round(Math.random() * 900) + "ms";
+      document.body.appendChild(drop);
+      (function (el) {
+        el.addEventListener("animationend", function () { el.remove(); });
+      })(drop);
+    }
+  }
+
+  // Trigger the first-load entrance animation (+ berry rain), only once
+  var entered = false;
+  function triggerEntrance() {
+    if (entered) return;
+    entered = true;
+    html.classList.add("loaded");
+    spawnBerryRain();
+  }
   window.addEventListener("load", function () {
-    requestAnimationFrame(function () {
-      html.classList.add("loaded");
-    });
+    requestAnimationFrame(triggerEntrance);
   });
   // Fallback in case 'load' already fired or is slow
-  setTimeout(function () { html.classList.add("loaded"); }, 1200);
+  setTimeout(triggerEntrance, 1200);
 
   // Mobile menu toggle
   var navToggle = document.querySelector(".nav-toggle");
