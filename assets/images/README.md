@@ -17,7 +17,6 @@ Real photos/art in place: `orca-2026.jpg` ("Orca 2026"), `mural-signals-flow.jpg
 | `bear-trail.png` | The bear illustration in the footer, bottom-left, followed by its footprints — real image in place, transparent background | ~3:2, transparent background |
 | `el-dragonfly.png` | Decorative accent perched on the homepage portrait frame | real image, transparent background |
 | `el-dotted-box.png` | Decorative frame peeking out behind the homepage portrait | real image, transparent background |
-| `el-berries.png` | Small strawberry decoration in the top-right corner of the Handmade Creations heading, original coral color (a single strawberry cropped from this same sheet is also used as `assets/icons/berry-toggle.png`, the theme-toggle button icon) | real image, transparent background |
 | `el-fish.png` | Extracted from Sallee's design-elements sheet but not placed anywhere yet — she didn't mention it in her notes, so it's sitting here pending confirmation on whether/where to use it | real image, transparent background |
 | `char-bird.png` / `char-crocodile.png` / `char-frog.png` | Ask Me Anything comic characters, alongside the existing hand-coded fox/bear SVGs — each Q&A pairs two of the five at random | real images, transparent background |
 

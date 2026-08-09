@@ -3,6 +3,8 @@
 
   // TODO(Sallee): replace with your real Formspree endpoint, e.g.
   // "https://formspree.io/f/abcdwxyz" — create a free form at https://formspree.io
+  // The same endpoint is also used in js/ama.js for custom AMA questions —
+  // update both files together so everything lands in one inbox.
   var FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID";
   var CONTACT_EMAIL = "salleeschaerer@gmail.com";
 

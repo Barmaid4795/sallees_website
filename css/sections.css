@@ -162,17 +162,6 @@
   .hero-deco-box, .hero-deco-dragonfly { display: none; }
 }
 
-.handmade-deco-berries {
-  position: absolute;
-  top: -16px;
-  right: -8px;
-  width: 46px;
-  transform: rotate(8deg);
-}
-@media (max-width: 860px) {
-  .handmade-deco-berries { display: none; }
-}
-
 .greeting {
   font-family: var(--font-display);
   font-size: 1.4rem;
@@ -483,6 +472,7 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   border: 1.5px solid var(--border);
   font-family: var(--font-body);
 }
+.ama-custom-status { margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted); min-height: 1.2em; }
 
 /* ===================== SEARCH ===================== */
 .search-overlay {

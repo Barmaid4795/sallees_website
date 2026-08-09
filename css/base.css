@@ -98,7 +98,6 @@ img { max-width: 100%; display: block; }
 }
 
 .section-head { max-width: 720px; margin-bottom: 2.5rem; }
-.deco-host { position: relative; }
 .section-kicker {
   display: inline-block;
   font-family: var(--font-body);

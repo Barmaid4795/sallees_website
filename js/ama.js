@@ -45,14 +45,48 @@
   };
   var CUSTOM_PAIR = { asker: "frog", answerer: "crocodile" };
 
+  // Same Formspree form as js/contact.js — visitor-submitted AMA questions land
+  // in the same inbox. TODO(Sallee): update this alongside the one in contact.js.
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID";
+  var CONTACT_EMAIL = "salleeschaerer@gmail.com";
+  var isFormspreeConfigured = FORMSPREE_ENDPOINT.indexOf("REPLACE_WITH_YOUR_FORM_ID") === -1;
+
   var chips = document.querySelectorAll(".ama-chip[data-qa]");
   var overlay = document.querySelector(".ama-modal-overlay");
   var panel = document.getElementById("ama-comic-strip");
   var closeBtn = document.querySelector(".ama-modal .close-btn");
   var customForm = document.getElementById("ama-custom-form");
   var customInput = document.getElementById("ama-custom-input");
+  var customStatus = document.getElementById("ama-custom-status");
 
   if (!overlay || !panel) return;
+
+  function sendCustomQuestion(question) {
+    if (!isFormspreeConfigured) {
+      var mailto = "mailto:" + CONTACT_EMAIL +
+        "?subject=" + encodeURIComponent("Ask Me Anything — visitor question") +
+        "&body=" + encodeURIComponent(question);
+      window.location.href = mailto;
+      if (customStatus) customStatus.textContent = "Opening your email app so you can send this question directly.";
+      return;
+    }
+    if (customStatus) customStatus.textContent = "Sending your question…";
+    fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { Accept: "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify({ question: question, _subject: "Ask Me Anything — visitor question" })
+    })
+      .then(function (res) {
+        if (customStatus) {
+          customStatus.textContent = res.ok
+            ? "Sent! Sallee will get your question."
+            : "Something went wrong — please email " + CONTACT_EMAIL + " directly.";
+        }
+      })
+      .catch(function () {
+        if (customStatus) customStatus.textContent = "Something went wrong — please email " + CONTACT_EMAIL + " directly.";
+      });
+  }
 
   function makeFigure(charKey) {
     var fig = document.createElement("div");
@@ -114,9 +148,10 @@
       e.preventDefault();
       var question = customInput.value.trim();
       if (!question) return;
+      sendCustomQuestion(question);
       openModal(
         question,
-        "Great question! Sallee hasn't recorded a real answer for this one yet — check back soon, or reach out directly through the contact form below.",
+        "Great question! I don't have this one answered yet, but it's been sent my way — I'll follow up soon. Feel free to reach out directly through the contact form below too.",
         CUSTOM_PAIR.asker,
         CUSTOM_PAIR.answerer
       );
