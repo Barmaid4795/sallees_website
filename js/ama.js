@@ -24,15 +24,9 @@
       asker: "crocodile",
       answerer: "frog"
     },
-    leadership: {
-      q: "What is fractional design leadership?",
-      a: "It's when a client brings me on part-time to guide the creative direction of a project without hiring a full-time designer — think of it as renting an art director for exactly as long as you need one.",
-      asker: "frog",
-      answerer: "bird"
-    },
     recent: {
       q: "What have you worked on recently?",
-      a: "Most recently, logo and banner design for UCalgary's Indigenous Student Resource Page, plus a big mural piece and a new acrylic painting, Orca 2026.",
+      a: "Most recently, I have been working on the University of Calgary's academic student probation initiative, as well as a communication media film mural, as well as Orca 2026 acrylic painting.",
       asker: "bird",
       answerer: "frog"
     },
