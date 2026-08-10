@@ -77,4 +77,4 @@ Both the contact form and the AMA "ask your own question" box submit to the same
 
 ## Development notes
 
-Active development happens on the `claude/sallee-project-website-245om0` branch and is merged into `main` after each round of changes. This README is kept up to date as the site evolves — if you're reading a stale version, check `main` for the latest.
+Development happens directly on `main` — no long-lived feature branch. (Earlier rounds used a `claude/sallee-project-website-245om0` branch, merged and deleted once caught up.) This README is kept up to date as the site evolves — if you're reading a stale version, check `main` for the latest.

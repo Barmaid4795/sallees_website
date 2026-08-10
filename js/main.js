@@ -9,23 +9,26 @@
 
   // First-load berry rain — falls from the top, lands bottom-left near the footer bear
   function spawnBerryRain() {
-    var count = 22;
+    var icy = html.getAttribute("data-theme") === "icy";
+    var count = icy ? 32 : 22;
+    var berryImg = icy ? "assets/icons/blueberry-toggle.svg" : "assets/icons/berry-toggle.png";
     var vw = window.innerWidth;
     var vh = window.innerHeight;
     for (var i = 0; i < count; i++) {
-      var size = 20 + Math.random() * 26;
+      var size = icy ? (24 + Math.random() * 38) : (20 + Math.random() * 26);
       var startTop = -(size + Math.random() * 260);
       var left = Math.random() * Math.min(vw * 0.9, vw - size);
       var landY = vh - (36 + Math.random() * 70);
       var drop = document.createElement("div");
       drop.className = "berry-rain-drop";
       drop.style.setProperty("--size", size + "px");
+      drop.style.backgroundImage = "url(\"" + berryImg + "\")";
       drop.style.left = left + "px";
       drop.style.top = startTop + "px";
       drop.style.setProperty("--ty", (landY - startTop) + "px");
-      drop.style.setProperty("--tx", Math.round(Math.random() * 60 - 30) + "px");
-      drop.style.setProperty("--tr", Math.round(Math.random() * 300 - 150) + "deg");
-      drop.style.animationDuration = (1.1 + Math.random() * 0.6) + "s";
+      drop.style.setProperty("--tx", Math.round(Math.random() * (icy ? 100 : 60) - (icy ? 50 : 30)) + "px");
+      drop.style.setProperty("--tr", Math.round(Math.random() * (icy ? 480 : 300) - (icy ? 240 : 150)) + "deg");
+      drop.style.animationDuration = (icy ? (1.0 + Math.random() * 0.8) : (1.1 + Math.random() * 0.6)) + "s";
       drop.style.animationDelay = Math.round(Math.random() * 900) + "ms";
       document.body.appendChild(drop);
       (function (el) {

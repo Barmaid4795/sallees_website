@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" aria-hidden="true">
+  <defs>
+    <radialGradient id="bb-a" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#9fb6d9"/>
+      <stop offset="45%" stop-color="#5a6bab"/>
+      <stop offset="100%" stop-color="#333a6b"/>
+    </radialGradient>
+    <radialGradient id="bb-b" cx="38%" cy="28%" r="75%">
+      <stop offset="0%" stop-color="#a7bee0"/>
+      <stop offset="45%" stop-color="#5568a8"/>
+      <stop offset="100%" stop-color="#2e3566"/>
+    </radialGradient>
+    <radialGradient id="bb-c" cx="36%" cy="26%" r="80%">
+      <stop offset="0%" stop-color="#b1c7e6"/>
+      <stop offset="45%" stop-color="#5a6cb0"/>
+      <stop offset="100%" stop-color="#2b3162"/>
+    </radialGradient>
+  </defs>
+
+  <!-- twig + tiny leaves -->
+  <path d="M50 8 C 47 16, 45 20, 44 26" fill="none" stroke="#6b7a4d" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M45 13 C 39 11, 34 13, 31 18 C 37 19, 42 18, 45 13 Z" fill="#7c8f52"/>
+  <path d="M47 10 C 52 6, 58 6, 62 10 C 56 12, 51 12, 47 10 Z" fill="#8ba05c"/>
+
+  <!-- back-left berry -->
+  <circle cx="31" cy="58" r="21" fill="url(#bb-a)"/>
+  <g transform="translate(31 76)" fill="#242849">
+    <path d="M0 -3.4 L1 -0.6 L0 0 L-1 -0.6 Z"/>
+    <path d="M3.4 -1 L0.9 0.7 L0.6 0.2 L2.9 -1.5 Z"/>
+    <path d="M2.1 3.1 L-0.3 1.1 L0.1 0.6 L2.6 2.4 Z"/>
+    <path d="M-2.1 3.1 L0.3 1.1 L-0.1 0.6 L-2.6 2.4 Z"/>
+    <path d="M-3.4 -1 L-0.9 0.7 L-0.6 0.2 L-2.9 -1.5 Z"/>
+  </g>
+
+  <!-- back-right berry -->
+  <circle cx="70" cy="53" r="19" fill="url(#bb-b)"/>
+  <g transform="translate(70 70)" fill="#20244a">
+    <path d="M0 -3.1 L0.9 -0.5 L0 0 L-0.9 -0.5 Z"/>
+    <path d="M3.1 -0.9 L0.8 0.6 L0.5 0.2 L2.6 -1.4 Z"/>
+    <path d="M1.9 2.8 L-0.3 1 L0.1 0.5 L2.3 2.2 Z"/>
+    <path d="M-1.9 2.8 L0.3 1 L-0.1 0.5 L-2.3 2.2 Z"/>
+    <path d="M-3.1 -0.9 L-0.8 0.6 L-0.5 0.2 L-2.6 -1.4 Z"/>
+  </g>
+
+  <!-- front-center berry, largest -->
+  <circle cx="50" cy="83" r="27" fill="url(#bb-c)"/>
+  <g transform="translate(50 108)" fill="#22254a">
+    <path d="M0 -4.3 L1.3 -0.8 L0 0 L-1.3 -0.8 Z"/>
+    <path d="M4.3 -1.3 L1.1 0.9 L0.7 0.3 L3.7 -1.9 Z"/>
+    <path d="M2.7 4 L-0.4 1.4 L0.1 0.8 L3.3 2.9 Z"/>
+    <path d="M-2.7 4 L0.4 1.4 L-0.1 0.8 L-3.3 2.9 Z"/>
+    <path d="M-4.3 -1.3 L-1.1 0.9 L-0.7 0.3 L-3.7 -1.9 Z"/>
+  </g>
+</svg>

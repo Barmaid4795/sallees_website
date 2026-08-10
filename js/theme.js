@@ -18,24 +18,29 @@
     return html.getAttribute("data-theme") === "icy" ? "icy" : "warm";
   }
 
-  function spawnTumble() {
+  function spawnTumble(theme) {
+    var icy = theme === "icy";
+    var count = icy ? 28 : TUMBLE_COUNT;
+    var berryImg = icy ? "assets/icons/blueberry-toggle.svg" : "assets/icons/berry-toggle.png";
     var rect = toggle.getBoundingClientRect();
     var originX = rect.left + rect.width / 2;
     var originY = rect.top + rect.height / 2;
     var vw = window.innerWidth;
     var vh = window.innerHeight;
 
-    for (var i = 0; i < TUMBLE_COUNT; i++) {
-      var size = 30 + Math.random() * 30;
+    for (var i = 0; i < count; i++) {
+      var size = icy ? (36 + Math.random() * 46) : (30 + Math.random() * 30);
       var berry = document.createElement("div");
       berry.className = "berry-tumble";
       berry.style.setProperty("--size", size + "px");
+      berry.style.backgroundImage = "url(\"" + berryImg + "\")";
       berry.style.left = (originX - size / 2) + "px";
       berry.style.top = (originY - size / 2) + "px";
-      berry.style.setProperty("--tx", -(0.15 + Math.random() * 0.95) * vw + "px");
-      berry.style.setProperty("--ty", -(0.1 + Math.random() * 0.75) * vh + "px");
-      berry.style.setProperty("--tr", (Math.random() * 720 - 360) + "deg");
+      berry.style.setProperty("--tx", -(0.15 + Math.random() * (icy ? 1.25 : 0.95)) * vw + "px");
+      berry.style.setProperty("--ty", -(0.1 + Math.random() * (icy ? 0.95 : 0.75)) * vh + "px");
+      berry.style.setProperty("--tr", (Math.random() * (icy ? 1080 : 720) - (icy ? 540 : 360)) + "deg");
       berry.style.animationDelay = Math.round(Math.random() * 220) + "ms";
+      berry.style.animationDuration = icy ? (1.3 + Math.random() * 0.35) + "s" : "";
       document.body.appendChild(berry);
       (function (el) {
         el.addEventListener("animationend", function () {
@@ -56,7 +61,7 @@
     // force reflow so the animation can restart every click
     void overlay.offsetWidth;
     overlay.classList.add("washing");
-    spawnTumble();
+    spawnTumble(next);
 
     setTimeout(function () {
       html.setAttribute("data-theme", next);

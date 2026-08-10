@@ -57,7 +57,6 @@ html.loaded .berry-toggle { animation-delay: 1.9s; }
   background-image: url("../assets/icons/berry-toggle.png");
   background-size: contain;
   background-repeat: no-repeat;
-  filter: hue-rotate(200deg) saturate(1.4);
   pointer-events: none;
   z-index: 750;
   opacity: 0;
@@ -99,7 +98,6 @@ html.loaded .berry-toggle { animation-delay: 1.9s; }
   background-image: url("../assets/icons/berry-toggle.png");
   background-size: contain;
   background-repeat: no-repeat;
-  filter: hue-rotate(200deg) saturate(1.4);
   pointer-events: none;
   z-index: 750;
   opacity: 0;
