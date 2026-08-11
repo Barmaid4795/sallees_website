@@ -34,9 +34,11 @@ Since this repo is private and not deployed publicly, use a simple local static 
 **Python (usually already installed):**
 ```bash
 cd sallees_website
-python3 -m http.server 8080
+python3 dev-server.py 8080
 ```
 Then open `http://localhost:8080` on the same machine, or `http://<that-machine's-LAN-IP>:8080` from another device on the same network.
+
+`dev-server.py` is a thin wrapper around `http.server` that sends `Cache-Control: no-store` on every response — plain `python3 -m http.server` sends no cache headers at all, so browsers can silently keep serving a stale cached copy of `index.html`/CSS/JS while you're actively editing. Use `python3 -m http.server` directly only if you specifically want normal caching behavior.
 
 **Node.js, if you have it:**
 ```bash
