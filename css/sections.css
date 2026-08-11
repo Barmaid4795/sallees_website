@@ -421,9 +421,14 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 }
 .comic-panel.reverse { grid-template-columns: 1fr 96px; transform: rotate(0.6deg); }
 .comic-panel.reverse .comic-figure { order: 2; }
+.comic-figure {
+  display: flex;
+  justify-content: center;
+}
 .comic-figure img {
-  width: 96px;
   height: 104px;
+  width: auto;
+  max-width: 96px;
   object-fit: contain;
   filter: drop-shadow(0 2px 0 rgba(58, 42, 23, 0.3));
 }
