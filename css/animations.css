@@ -38,6 +38,28 @@ html.loaded .berry-toggle { animation-delay: 1.9s; }
 .about-half { --fy: -70px; --fr: 1deg; }
 .berry-toggle { --fy: -50px; --fr: 8deg; }
 
+/* Dragonfly flies in to its resting spot, then idles with a light hover */
+html:not(.loaded) .hero-deco-dragonfly { opacity: 0; }
+html.loaded .hero-deco-dragonfly {
+  animation:
+    dragonflyFlyIn 1.3s cubic-bezier(0.22, 1, 0.36, 1) 1.1s both,
+    dragonflyHover 3.4s ease-in-out 2.4s infinite;
+}
+@keyframes dragonflyFlyIn {
+  0% { opacity: 0; transform: translate(170px, -95px) rotate(-55deg) scale(0.6); }
+  30% { opacity: 1; }
+  55% { transform: translate(-16px, 34px) rotate(42deg) scale(1.06); }
+  78% { transform: translate(6px, -10px) rotate(4deg) scale(0.98); }
+  100% { opacity: 1; transform: translate(0, 0) rotate(14deg) scale(1); }
+}
+@keyframes dragonflyHover {
+  0%, 100% { transform: translate(0, 0) rotate(14deg); }
+  50% { transform: translate(0, -5px) rotate(17deg); }
+}
+@media (max-width: 640px) {
+  html.loaded .hero-deco-dragonfly { animation: none; }
+}
+
 @media (max-width: 640px) {
   .enter-piece { animation-name: fadeOnly; animation-duration: 0.6s !important; }
   @keyframes fadeOnly {

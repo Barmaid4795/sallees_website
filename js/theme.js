@@ -8,20 +8,24 @@
 
   var THEME_COLORS = { warm: "#5D51A1", icy: "#3E6B8A" };
   var TUMBLE_COUNT = 16;
+  var BLUEBERRY_COUNT = 40;
+  function randomBlueberryImg() {
+    var n = 1 + Math.floor(Math.random() * BLUEBERRY_COUNT);
+    return "assets/icons/blueberries/blueberry-" + (n < 10 ? "0" + n : n) + ".png";
+  }
 
   var saved = localStorage.getItem("sallee-theme");
-  if (saved === "icy") {
-    html.setAttribute("data-theme", "icy");
+  if (saved === "warm") {
+    html.setAttribute("data-theme", "warm");
   }
 
   function currentTheme() {
-    return html.getAttribute("data-theme") === "icy" ? "icy" : "warm";
+    return html.getAttribute("data-theme") === "warm" ? "warm" : "icy";
   }
 
   function spawnTumble(theme) {
     var icy = theme === "icy";
     var count = icy ? 28 : TUMBLE_COUNT;
-    var berryImg = icy ? "assets/icons/blueberry-toggle.svg" : "assets/icons/berry-toggle.png";
     var rect = toggle.getBoundingClientRect();
     var originX = rect.left + rect.width / 2;
     var originY = rect.top + rect.height / 2;
@@ -29,6 +33,7 @@
     var vh = window.innerHeight;
 
     for (var i = 0; i < count; i++) {
+      var berryImg = icy ? randomBlueberryImg() : "assets/icons/berry-toggle.png";
       var size = icy ? (36 + Math.random() * 46) : (30 + Math.random() * 30);
       var berry = document.createElement("div");
       berry.className = "berry-tumble";

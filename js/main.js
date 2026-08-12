@@ -7,14 +7,21 @@
   var isFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   html.classList.toggle("fine-pointer", isFinePointer);
 
+  // 40 hand-painted blueberries — one is picked at random per drop/tumble in icy theme
+  var BLUEBERRY_COUNT = 40;
+  function randomBlueberryImg() {
+    var n = 1 + Math.floor(Math.random() * BLUEBERRY_COUNT);
+    return "assets/icons/blueberries/blueberry-" + (n < 10 ? "0" + n : n) + ".png";
+  }
+
   // First-load berry rain — falls from the top, lands bottom-left near the footer bear
   function spawnBerryRain() {
-    var icy = html.getAttribute("data-theme") === "icy";
+    var icy = html.getAttribute("data-theme") !== "warm";
     var count = icy ? 32 : 22;
-    var berryImg = icy ? "assets/icons/blueberry-toggle.svg" : "assets/icons/berry-toggle.png";
     var vw = window.innerWidth;
     var vh = window.innerHeight;
     for (var i = 0; i < count; i++) {
+      var berryImg = icy ? randomBlueberryImg() : "assets/icons/berry-toggle.png";
       var size = icy ? (24 + Math.random() * 38) : (20 + Math.random() * 26);
       var startTop = -(size + Math.random() * 260);
       var left = Math.random() * Math.min(vw * 0.9, vw - size);

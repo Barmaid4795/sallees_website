@@ -32,7 +32,7 @@
     },
     engagement: {
       q: "How do you typically start a new engagement?",
-      a: "With a conversation about your vision, timeline, and budget — then I sketch a couple of directions before we commit to a final concept together.",
+      a: "With a conversation about your vision, timeline, and budget — then I sketch a couple of directions before we commit to a final concept together. Once we're aligned, I send over a contract and a quote, and work begins after both are signed off.",
       asker: "crocodile",
       answerer: "bird"
     }

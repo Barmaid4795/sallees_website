@@ -170,3 +170,21 @@ img { max-width: 100%; display: block; }
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Deter grabbing full-res artwork via browser Print / Save-as-PDF */
+@media print {
+  .flip-front img, .mural-scroll img, .hero-portrait img { visibility: hidden; }
+  .flip-front::before, .mural-block::before {
+    content: "Image not available for print — visit the live site to view.";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    background: #fff;
+    color: #000;
+  }
+}

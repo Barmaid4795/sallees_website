@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Placeholder: other handmade creation">
-  <rect width="600" height="600" fill="#FAF6F0"/>
-  <ellipse cx="300" cy="420" rx="160" ry="40" fill="#4A6B53" opacity="0.25"/>
-  <path d="M170 400 C 170 300 180 220 300 200 C 420 220 430 300 430 400 C 430 460 170 460 170 400 Z" fill="#E9C46A"/>
-  <path d="M180 300 C 250 320 350 320 420 300" stroke="#1A1A1A" stroke-width="3" fill="none" opacity="0.4"/>
-  <path d="M175 350 C 250 372 350 372 425 350" stroke="#1A1A1A" stroke-width="3" fill="none" opacity="0.4"/>
-  <text x="50%" y="95%" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#1A1A1A" opacity="0.6">Handmade item — placeholder</text>
-</svg>

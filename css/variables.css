@@ -1,23 +1,22 @@
 /* ============================================
    Palette system
-   Default = warm multicolor palette (Sallee's brief)
-   Alternate = icy blue palette (invented — no hex codes were given,
-   review these and tweak to taste)
+   Default = icy blue (blueberry) palette
+   Alternate = warm multicolor palette
    ============================================ */
 
 :root {
-  /* warm multicolor (default) */
-  --bg: #F6E9D6; /* warm sand, deliberately more colorful than off-white */
-  --surface: #FBF3E5; /* warm cream card surface, never pure white */
-  --text: #1A1A1A;
-  --text-muted: #57524b;
-  --accent-1: #5D51A1; /* muted brand purple */
-  --accent-2: #F4A261; /* vibrant peach */
-  --accent-3: #E9C46A; /* warm ochre */
-  --accent-4: #F1A7B4; /* pastel rose pink */
-  --accent-5: #4A6B53; /* moss green */
-  --border: rgba(26, 26, 26, 0.12);
-  --shadow: rgba(26, 26, 26, 0.14);
+  /* icy blue / blueberry (default) */
+  --bg: #D8ECF4; /* invented light neutral, more saturated blue — Sallee's swatches were accents only */
+  --surface: #E9F6FA; /* light blue card surface, never pure white */
+  --text: #16232B; /* invented dark neutral, for body-text contrast */
+  --text-muted: #4D6472;
+  --accent-1: #095f92; /* Sallee's icy palette */
+  --accent-2: #2f5288;
+  --accent-3: #a1d0fc;
+  --accent-4: #b6e5ed;
+  --accent-5: #243e7d;
+  --border: rgba(22, 35, 43, 0.12);
+  --shadow: rgba(22, 35, 43, 0.16);
   --ink-on-accent: #FFFCF4; /* off-white text/ink used on colored backgrounds — never pure white */
 
   /* artwork areas always sit on warm milk white, regardless of theme */
@@ -37,17 +36,17 @@
   --transition-med: 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-:root[data-theme="icy"] {
-  --bg: #D8ECF4; /* invented light neutral, more saturated blue — Sallee's swatches were accents only */
-  --surface: #E9F6FA; /* light blue card surface, never pure white */
-  --text: #16232B; /* invented dark neutral, for body-text contrast */
-  --text-muted: #4D6472;
-  --accent-1: #095f92; /* Sallee's icy palette */
-  --accent-2: #2f5288;
-  --accent-3: #a1d0fc;
-  --accent-4: #b6e5ed;
-  --accent-5: #243e7d;
-  --border: rgba(22, 35, 43, 0.12);
-  --shadow: rgba(22, 35, 43, 0.16);
+:root[data-theme="warm"] {
+  --bg: #F6E9D6; /* warm sand, deliberately more colorful than off-white */
+  --surface: #FBF3E5; /* warm cream card surface, never pure white */
+  --text: #1A1A1A;
+  --text-muted: #57524b;
+  --accent-1: #5D51A1; /* muted brand purple */
+  --accent-2: #F4A261; /* vibrant peach */
+  --accent-3: #E9C46A; /* warm ochre */
+  --accent-4: #F1A7B4; /* pastel rose pink */
+  --accent-5: #4A6B53; /* moss green */
+  --border: rgba(26, 26, 26, 0.12);
+  --shadow: rgba(26, 26, 26, 0.14);
   --bucket-fill: var(--accent-1);
 }

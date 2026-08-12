@@ -62,7 +62,6 @@
       <section id="home" class="hero-half">
         <span class="section-kicker enter-piece hero-kicker">Welcome</span>
         <div class="hero-portrait-frame enter-piece">
-          <img class="hero-deco-box" src="assets/images/el-dotted-box.png" alt="" aria-hidden="true">
           <figure class="hero-portrait">
             <img src="assets/images/portrait.jpg" alt="Portrait of Sallee Icy Schaerer">
           </figure>
@@ -79,12 +78,11 @@
         <p class="greeting">Tansi, Sallee Icy Schaerer nisihkason. Otipemisiwak niya.</p>
 
         <p>
-          My family comes from the Scott, Smith, Morrison, and Raymond lines, and their history is
-          woven into everything I make. I'm from Alberta, and it's where my art, my design work,
-          and my connection to community all grow from — I work across painting, digital design,
-          and handmade craft, moving between fine art, client work, and pieces that carry my
-          Indigenous identity and story.
+          Hello, my name is Sallee Icy Schaerer and I am a member of the Metis Nation of Alberta.
+          I work across painting, digital design, and handmade craft, moving between fine art,
+          client work.
         </p>
+        <p class="family-names-label">My family names:</p>
         <ul class="family-names">
           <li>Scott</li><li>Smith</li><li>Morrison</li><li>Raymond</li>
         </ul>
@@ -104,7 +102,6 @@
     <div class="section-head">
       <span class="section-kicker">Art &amp; Design</span>
       <h2>Paintings, digital art, murals &amp; design work</h2>
-      <p class="muted">Just the art up front — hover a piece (or tap, on mobile) to flip it and read the story, links, medium, date, and dimensions.</p>
     </div>
 
     <div class="filter-row art-filters" role="group" aria-label="Filter artwork by medium">
@@ -166,7 +163,7 @@
         data-search-title="Academic Turnaround Program" data-search-medium="Workbook Designs and Infographics"
         data-search-project="UCalgary" data-search-keywords="workbook infographic design academic turnaround program">
         <div class="flip-card-inner">
-          <div class="flip-face flip-front">
+          <div class="flip-face flip-front watermark-strong">
             <img src="assets/images/academic-turnaround.jpg" alt="Academic Turnaround Program: An Opportunity for Renewal — UCalgary workbook cover art">
             <div class="flip-front-scrim">
               <h3>Academic Turnaround Program at UCalgary</h3>
@@ -178,7 +175,7 @@
               <h3>Academic Turnaround Program at UCalgary</h3>
               <p class="meta"><span>Workbook Designs and Infographics</span></p>
               <p class="desc">Workbook and infographic design for UCalgary's Academic Turnaround Program.</p>
-              <a class="btn" href="#" data-todo>View project</a>
+              <a class="btn" href="#" data-todo>Coming Soon</a>
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer. Not for reproduction without permission.</p>
           </div>
@@ -208,34 +205,17 @@
    <div class="section-card">
     <div class="section-head">
       <span class="section-kicker">Handmade Creations</span>
-      <h2>Jewelry, dream catchers &amp; other handmade pieces</h2>
+      <h2>Dream catchers &amp; other handmade pieces</h2>
     </div>
 
-    <div class="gallery-grid">
-      <article class="flip-card" data-search-title="Handmade Jewelry" data-search-medium="Jewelry" data-search-keywords="jewelry beadwork necklace handmade">
-        <div class="flip-card-inner">
-          <div class="flip-face flip-front">
-            <img src="assets/images/handmade-jewelry.svg" alt="Handmade jewelry piece, placeholder image">
-            <div class="flip-front-scrim">
-              <h3>Handmade Jewelry</h3>
-              <span class="tap-hint">Tap to flip</span>
-            </div>
-          </div>
-          <div class="flip-face flip-back">
-            <div>
-              <h3>Handmade Jewelry</h3>
-              <p class="meta"><span>Jewelry</span></p>
-              <p class="desc">Handmade jewelry pieces, made using traditional beadwork techniques.</p>
-            </div>
-            <p class="copyright-note">© Sallee Icy Schaerer.</p>
-          </div>
-        </div>
-      </article>
-
+    <div class="gallery-grid" id="handmade-gallery">
       <article class="flip-card" data-search-title="Dream Catcher" data-search-medium="Dream Catcher" data-search-keywords="dream catcher handmade craft">
         <div class="flip-card-inner">
-          <div class="flip-face flip-front">
-            <img src="assets/images/handmade-dreamcatcher.svg" alt="Handmade dream catcher, placeholder image">
+          <div class="flip-face flip-front no-watermark">
+            <div class="flip-front-duo">
+              <img src="assets/images/handmade-dreamcatcher-blue.jpg" alt="Handmade dream catcher with light blue and turquoise ribbons and feathers, hanging from a tree">
+              <img src="assets/images/handmade-dreamcatcher-pink.jpg" alt="Handmade dream catcher with pink and white ribbons and feathers, hanging from a tree">
+            </div>
             <div class="flip-front-scrim">
               <h3>Dream Catcher</h3>
               <span class="tap-hint">Tap to flip</span>
@@ -245,27 +225,50 @@
             <div>
               <h3>Dream Catcher</h3>
               <p class="meta"><span>Dream Catcher</span></p>
-              <p class="desc">A handmade dream catcher, made with care and attention to traditional style.</p>
+              <p class="desc">Handmade dream catchers, made with care and attention to traditional style.</p>
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer.</p>
           </div>
         </div>
       </article>
 
-      <article class="flip-card" data-search-title="Other Handmade Items" data-search-medium="Handmade" data-search-keywords="handmade craft other items">
+      <article class="flip-card" data-search-title="Hand-Painted T-Shirt — Custom" data-search-medium="Handmade" data-search-keywords="hand painted hoodie t-shirt custom sea creatures">
         <div class="flip-card-inner">
-          <div class="flip-face flip-front">
-            <img src="assets/images/handmade-other.svg" alt="Other handmade creation, placeholder image">
+          <div class="flip-face flip-front watermark-strong">
+            <div class="flip-front-duo">
+              <img src="assets/images/handmade-hoodie-back.jpg" alt="Hand-painted hoodie with octopus, puffin, whale, lionfish, crab, and other sea creatures">
+              <img src="assets/images/handmade-hoodie-anglerfish.jpg" alt="Close-up of a hand-painted anglerfish on the shoulder of a hoodie">
+            </div>
             <div class="flip-front-scrim">
-              <h3>Other Handmade Items</h3>
+              <h3>Hand-Painted T-Shirt — Custom</h3>
               <span class="tap-hint">Tap to flip</span>
             </div>
           </div>
           <div class="flip-face flip-back">
             <div>
-              <h3>Other Handmade Items</h3>
+              <h3>Hand-Painted T-Shirt — Custom</h3>
+              <p class="meta"><span>Hand-Painted Apparel</span></p>
+              <p class="desc">Custom hand-painted sea-creature designs on a hoodie — available as a made-to-order commission.</p>
+            </div>
+            <p class="copyright-note">© Sallee Icy Schaerer.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="flip-card" data-search-title="Handmade Creations" data-search-medium="Handmade" data-search-keywords="felt monster plush handmade craft">
+        <div class="flip-card-inner">
+          <div class="flip-face flip-front no-watermark">
+            <img src="assets/images/handmade-other.jpg" alt="Handmade felt monster with mismatched eyes, yarn hair, and a butterfly charm">
+            <div class="flip-front-scrim">
+              <h3>Handmade Creations</h3>
+              <span class="tap-hint">Tap to flip</span>
+            </div>
+          </div>
+          <div class="flip-face flip-back">
+            <div>
+              <h3>Handmade Creations</h3>
               <p class="meta"><span>Handmade</span></p>
-              <p class="desc">Other handmade items, each made as a one-of-a-kind piece.</p>
+              <p class="desc">A one-of-a-kind felt monster, hand-stitched with yarn hair and a butterfly charm.</p>
             </div>
             <p class="copyright-note">© Sallee Icy Schaerer.</p>
           </div>
@@ -274,6 +277,7 @@
     </div>
    </div>
   </section>
+
 
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="section container reveal">
@@ -335,21 +339,21 @@
         <img src="assets/images/bear-trail.png" alt="">
       </div>
       <div class="footer-prints">
-        <span class="bear-print"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><ellipse cx="50" cy="32" rx="29" ry="32"/><circle cx="15" cy="68" r="13"/><circle cx="33" cy="81" r="13.5"/><circle cx="50" cy="85" r="14"/><circle cx="67" cy="81" r="13.5"/><circle cx="85" cy="68" r="13"/></svg></span>
+        <span class="bear-print"></span>
         <span class="print-gap" style="flex-grow:1"></span>
-        <span class="bear-print"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><ellipse cx="50" cy="32" rx="29" ry="32"/><circle cx="15" cy="68" r="13"/><circle cx="33" cy="81" r="13.5"/><circle cx="50" cy="85" r="14"/><circle cx="67" cy="81" r="13.5"/><circle cx="85" cy="68" r="13"/></svg></span>
+        <span class="bear-print"></span>
         <span class="print-gap" style="flex-grow:1.3"></span>
-        <span class="bear-print"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><ellipse cx="50" cy="32" rx="29" ry="32"/><circle cx="15" cy="68" r="13"/><circle cx="33" cy="81" r="13.5"/><circle cx="50" cy="85" r="14"/><circle cx="67" cy="81" r="13.5"/><circle cx="85" cy="68" r="13"/></svg></span>
+        <span class="bear-print"></span>
         <span class="print-gap" style="flex-grow:1.7"></span>
-        <span class="bear-print"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><ellipse cx="50" cy="32" rx="29" ry="32"/><circle cx="15" cy="68" r="13"/><circle cx="33" cy="81" r="13.5"/><circle cx="50" cy="85" r="14"/><circle cx="67" cy="81" r="13.5"/><circle cx="85" cy="68" r="13"/></svg></span>
+        <span class="bear-print"></span>
         <span class="print-gap" style="flex-grow:2.2"></span>
-        <span class="bear-print"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><ellipse cx="50" cy="32" rx="29" ry="32"/><circle cx="15" cy="68" r="13"/><circle cx="33" cy="81" r="13.5"/><circle cx="50" cy="85" r="14"/><circle cx="67" cy="81" r="13.5"/><circle cx="85" cy="68" r="13"/></svg></span>
+        <span class="bear-print"></span>
         <span class="print-gap" style="flex-grow:2.8"></span>
-        <span class="bear-print"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><ellipse cx="50" cy="32" rx="29" ry="32"/><circle cx="15" cy="68" r="13"/><circle cx="33" cy="81" r="13.5"/><circle cx="50" cy="85" r="14"/><circle cx="67" cy="81" r="13.5"/><circle cx="85" cy="68" r="13"/></svg></span>
+        <span class="bear-print"></span>
         <span class="print-gap" style="flex-grow:3.5"></span>
-        <span class="bear-print"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><ellipse cx="50" cy="32" rx="29" ry="32"/><circle cx="15" cy="68" r="13"/><circle cx="33" cy="81" r="13.5"/><circle cx="50" cy="85" r="14"/><circle cx="67" cy="81" r="13.5"/><circle cx="85" cy="68" r="13"/></svg></span>
+        <span class="bear-print"></span>
         <span class="print-gap" style="flex-grow:4.3"></span>
-        <span class="bear-print"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><ellipse cx="50" cy="32" rx="29" ry="32"/><circle cx="15" cy="68" r="13"/><circle cx="33" cy="81" r="13.5"/><circle cx="50" cy="85" r="14"/><circle cx="67" cy="81" r="13.5"/><circle cx="85" cy="68" r="13"/></svg></span>
+        <span class="bear-print"></span>
       </div>
     </div>
 
@@ -367,7 +371,7 @@
 <!-- ============ STRAWBERRY / BLUEBERRY THEME TOGGLE ============ -->
 <button class="berry-toggle enter-piece" aria-label="Switch color palette">
   <img class="berry-icon-warm" src="assets/icons/berry-toggle.png" alt="" aria-hidden="true">
-  <img class="berry-icon-icy" src="assets/icons/blueberry-toggle.svg" alt="" aria-hidden="true">
+  <img class="berry-icon-icy" src="assets/icons/blueberry-toggle.png" alt="" aria-hidden="true">
 </button>
 <div class="theme-wash-overlay" aria-hidden="true"></div>
 
