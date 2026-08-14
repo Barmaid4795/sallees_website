@@ -663,7 +663,6 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   right: 0;
   width: 115px;
   height: 79px;
-  overflow: hidden;
   transition: right 2s cubic-bezier(0.4, 0, 0.2, 1);
   animation: bearWiggle 1.8s ease-in-out infinite;
 }
@@ -671,55 +670,7 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   right: calc(100% - 115px);
   animation: none;
 }
-/* Native-resolution (700x466) coordinate space, scaled down as one
-   group to fill the 115x79 box — lets the two leg cutouts be placed at
-   simple pixel offsets matching the source art, instead of fighting
-   object-fit math per element. */
-.footer-bear-rig {
-  position: relative;
-  width: 700px;
-  height: 466px;
-  transform: scale(0.16429);
-  transform-origin: top left;
-}
-.footer-bear-body,
-.footer-bear-leg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-}
-.footer-bear-body { width: 700px; height: 466px; }
-/* the two paw/leg cutouts, positioned to sit exactly over their spot on
-   the body image beneath them — invisible as a seam until they swing */
-.footer-bear-leg-front {
-  top: 275px;
-  left: 0;
-  width: 195px;
-  height: 135px;
-  transform-origin: 158px 14px;
-}
-.footer-bear-leg-back {
-  top: 295px;
-  left: 300px;
-  width: 120px;
-  height: 120px;
-  transform-origin: 58px 14px;
-}
-.footer-track:hover .footer-bear-leg-front {
-  animation: bearLegFrontSwing 0.42s ease-in-out infinite;
-}
-.footer-track:hover .footer-bear-leg-back {
-  animation: bearLegBackSwing 0.42s ease-in-out infinite 0.21s;
-}
-@keyframes bearLegFrontSwing {
-  0%, 100% { transform: rotate(-9deg); }
-  50% { transform: rotate(9deg); }
-}
-@keyframes bearLegBackSwing {
-  0%, 100% { transform: rotate(9deg); }
-  50% { transform: rotate(-9deg); }
-}
+.footer-bear img { width: 100%; height: 100%; object-fit: contain; }
 @keyframes bearWiggle {
   0%, 100% { transform: rotate(0deg); }
   50% { transform: rotate(-4deg); }
