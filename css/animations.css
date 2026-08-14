@@ -83,13 +83,20 @@ html.loaded .hero-deco-dragonfly {
 }
 .entrance-cloud {
   position: absolute;
-  top: -6px;
+  top: 6px;
   width: 132px;
   height: 44px;
-  background: var(--surface);
+  /* NOT var(--surface) — in the default (icy/dark) theme that's
+     #101F30 against a #0A1622 page background, a few percent lighter
+     and effectively invisible. Clouds need their own fixed white/pale-
+     blue coloring so they read against both the dark navy sky and the
+     warm sand sky, the way real clouds would. */
+  background: linear-gradient(180deg, #ffffff 0%, #eef6fc 55%, #cfe2f3 100%);
   border-radius: 50px;
   opacity: 0;
-  box-shadow: 0 8px 18px -10px var(--shadow);
+  box-shadow:
+    0 14px 26px -10px rgba(4, 12, 22, 0.55),
+    0 0 24px 2px rgba(255, 255, 255, 0.4);
   /* interactive: cursor lands on the cloud shape itself, not the
      pointer-events:none container. Only filter/box-shadow react to
      hover/click — transform is already owned by cloudDrift below, so
@@ -99,8 +106,10 @@ html.loaded .hero-deco-dragonfly {
   transition: filter 0.2s ease, box-shadow 0.2s ease;
 }
 .entrance-cloud:hover {
-  filter: brightness(1.18);
-  box-shadow: 0 10px 22px -8px var(--shadow);
+  filter: brightness(1.08);
+  box-shadow:
+    0 16px 30px -8px rgba(4, 12, 22, 0.6),
+    0 0 30px 4px rgba(255, 255, 255, 0.55);
 }
 /* the click "poke" reaction is driven by element.animate() in
    js/main.js (Web Animations API), not a CSS class — that runs as an
@@ -110,7 +119,7 @@ html.loaded .hero-deco-dragonfly {
 .entrance-cloud::after {
   content: "";
   position: absolute;
-  background: var(--surface);
+  background: linear-gradient(180deg, #ffffff 0%, #eef6fc 55%, #cfe2f3 100%);
   border-radius: 50%;
 }
 .entrance-cloud::before { width: 58px; height: 58px; top: -26px; left: 16px; }
@@ -129,8 +138,8 @@ html.loaded .entrance-cloud {
 }
 @keyframes cloudDrift {
   0% { opacity: 0; transform: translateY(-18px); }
-  10% { opacity: 0.95; transform: translateY(0); }
-  76% { opacity: 0.95; transform: translateY(0); }
+  10% { opacity: 1; transform: translateY(0); }
+  76% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(-12px); }
 }
 @media (max-width: 640px) {
@@ -185,48 +194,25 @@ html.loaded .entrance-cloud {
   width: var(--size, 58px);
   height: var(--size, 58px);
 }
+/* canopy + rigging lines + connector ring are one inline SVG (built in
+   js/main.js's buildParachuteCanopySVG) modeled on a real 5-gore
+   parachute — curved gore panels, a scalloped hem, and rigging lines
+   converging to a single ring — instead of a flat striped dome. Keep
+   this box's size in sync with the RIG_W / CANOPY_H / STRING_LEN
+   constants there. */
 .berry-parachute-canopy {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 108px;
-  height: 26px;
-  border-radius: 50% 50% 8% 8% / 100% 100% 20% 20%;
-  background: repeating-linear-gradient(90deg, var(--accent-1) 0 14px, var(--accent-3) 14px 28px);
-  box-shadow: 0 2px 5px -2px var(--shadow);
+  width: 104px;
+  height: 92px;
+  filter: drop-shadow(0 6px 8px var(--shadow));
 }
-/* four rigging lines fanning out from the canopy's rim and converging
-   to a single point well above the berry (not two lines running
-   straight down into it) */
-.berry-parachute-string {
-  position: absolute;
-  top: 26px;
-  width: 1.5px;
-  height: 36px;
-  background: var(--ink-on-accent);
-  opacity: 0.85;
-  transform-origin: top center;
-}
-.berry-parachute-string-a { left: 20px; transform: rotate(43deg); }
-.berry-parachute-string-b { left: 42px; transform: rotate(18deg); }
-.berry-parachute-string-c { left: 66px; transform: rotate(-18deg); }
-.berry-parachute-string-d { left: 88px; transform: rotate(-43deg); }
-/* the little ring/knot where all the lines meet, just above the berry */
-.berry-parachute-ring {
-  position: absolute;
-  top: 57px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--ink-on-accent);
-  opacity: 0.9;
-}
+.berry-parachute-canopy svg { display: block; width: 100%; height: 100%; }
 .berry-parachute-wind {
   position: absolute;
-  top: 55%;
+  top: 40%;
   width: 20px;
   height: 2px;
   border-radius: 2px;
@@ -235,7 +221,7 @@ html.loaded .entrance-cloud {
   animation: parachuteGust 1300ms ease-in-out infinite;
 }
 .berry-parachute-wind-a { left: -26px; animation-delay: 1300ms; }
-.berry-parachute-wind-b { right: -26px; top: 68%; animation-delay: 1950ms; }
+.berry-parachute-wind-b { right: -26px; top: 52%; animation-delay: 1950ms; }
 @keyframes parachuteGust {
   0%, 100% { opacity: 0; transform: translateX(0); }
   45% { opacity: 0.7; }
