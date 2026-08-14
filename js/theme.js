@@ -13,10 +13,21 @@
   // "css/assets/...".
   var BERRY_IMG = { warm: "/assets/icons/berry-toggle.png", icy: "/assets/icons/blueberry-toggle.png" };
   var BLUEBERRY_COUNT = 40;
-  var RUN_DELAY = 0;      // runner (with legs) sets off immediately
-  var WAVE_DELAY = 220;   // the plain-berry wave sets off a beat later, chasing it
-  var SWAP_AT = WAVE_DELAY + 460; // theme flips while the wave is fully covering the screen
-  var CLEANUP_AT = WAVE_DELAY + 950;
+
+  // Keep these in sync with the durations set on .berry-runner /
+  // .theme-wash-overlay.washing in sections.css.
+  var RUN_DURATION = 900;   // matches --run-duration on .berry-runner
+  var WAVE_DURATION = 2000; // matches the "washing" animation-duration
+
+  var RUN_DELAY = 0; // runner (with legs) sets off immediately
+  // The berryRun keyframes put the runner at 66vw (2/3 of the screen) at
+  // its 64% keyframe — keyframe percentages are fixed points in time
+  // regardless of easing, so 64% of RUN_DURATION is exactly that moment.
+  var WAVE_DELAY = Math.round(RUN_DURATION * 0.64);
+  // Theme flips while the wave is mid-dwell at full coverage (its
+  // keyframes hold 100% coverage from 48%-62% of WAVE_DURATION).
+  var SWAP_AT = WAVE_DELAY + Math.round(WAVE_DURATION * 0.54);
+  var CLEANUP_AT = WAVE_DELAY + WAVE_DURATION + 50;
 
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -40,10 +51,11 @@
     runner.className = "berry-runner";
     runner.style.setProperty("--runner-img", "url(\"" + BERRY_IMG[fromTheme] + "\")");
     runner.style.setProperty("--size", rect.width + "px");
-    // Start near the left edge (not at the toggle's own position, which
-    // already sits at the far right) so the sprint is actually visible
-    // crossing the screen, at the same height the toggle sits at.
-    runner.style.left = "-70px";
+    runner.style.setProperty("--run-duration", RUN_DURATION + "ms");
+    // Start just off the right edge (roughly where the toggle already
+    // lives) and sprint left across the whole screen, at the same height
+    // the toggle sits at.
+    runner.style.right = "-70px";
     runner.style.top = rect.top + "px";
     document.body.appendChild(runner);
     runner.addEventListener("animationend", function () {
