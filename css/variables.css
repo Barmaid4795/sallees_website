@@ -17,7 +17,7 @@
   --accent-2: #6C8FE0; /* brightened from Sallee's #2f5288 */
   --accent-3: #74C6F0; /* de-pastelled from Sallee's #a1d0fc for contrast as text/UI */
   --accent-4: #59B7C9; /* de-pastelled from Sallee's #b6e5ed for contrast as text/UI */
-  --accent-5: #7280DE; /* brightened from Sallee's #243e7d */
+  --accent-5: #6D7BD8; /* brightened from Sallee's #243e7d, dimmed slightly from initial pass for the footer */
   --border: rgba(234, 244, 250, 0.14);
   --shadow: rgba(0, 0, 0, 0.5);
   --ink-on-accent: #081018; /* dark ink for text sitting on the now-brighter accent colors */

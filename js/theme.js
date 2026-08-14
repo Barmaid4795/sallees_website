@@ -6,12 +6,23 @@
   var overlay = document.querySelector(".theme-wash-overlay");
   if (!toggle || !overlay) return;
 
-  var THEME_COLORS = { warm: "#5D51A1", icy: "#3E8FD0" };
-  var TUMBLE_COUNT = 16;
+  // Root-relative (leading "/"): these get injected into CSS custom
+  // properties consumed as background-image: var(...) in sections.css, and
+  // url() inside a custom property resolves against the *stylesheet's*
+  // location, not the page's — a plain relative path would 404 as
+  // "css/assets/...".
+  var BERRY_IMG = { warm: "/assets/icons/berry-toggle.png", icy: "/assets/icons/blueberry-toggle.png" };
   var BLUEBERRY_COUNT = 40;
+  var RUN_DELAY = 0;      // runner (with legs) sets off immediately
+  var WAVE_DELAY = 220;   // the plain-berry wave sets off a beat later, chasing it
+  var SWAP_AT = WAVE_DELAY + 460; // theme flips while the wave is fully covering the screen
+  var CLEANUP_AT = WAVE_DELAY + 950;
+
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   function randomBlueberryImg() {
     var n = 1 + Math.floor(Math.random() * BLUEBERRY_COUNT);
-    return "assets/icons/blueberries/blueberry-" + (n < 10 ? "0" + n : n) + ".png";
+    return "/assets/icons/blueberries/blueberry-" + (n < 10 ? "0" + n : n) + ".png";
   }
 
   var saved = localStorage.getItem("sallee-theme");
@@ -23,59 +34,56 @@
     return html.getAttribute("data-theme") === "warm" ? "warm" : "icy";
   }
 
-  function spawnTumble(theme) {
-    var icy = theme === "icy";
-    var count = icy ? 28 : TUMBLE_COUNT;
+  function spawnRunner(fromTheme) {
     var rect = toggle.getBoundingClientRect();
-    var originX = rect.left + rect.width / 2;
-    var originY = rect.top + rect.height / 2;
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
-
-    for (var i = 0; i < count; i++) {
-      var berryImg = icy ? randomBlueberryImg() : "assets/icons/berry-toggle.png";
-      var size = icy ? (36 + Math.random() * 46) : (30 + Math.random() * 30);
-      var berry = document.createElement("div");
-      berry.className = "berry-tumble";
-      berry.style.setProperty("--size", size + "px");
-      berry.style.backgroundImage = "url(\"" + berryImg + "\")";
-      berry.style.left = (originX - size / 2) + "px";
-      berry.style.top = (originY - size / 2) + "px";
-      berry.style.setProperty("--tx", -(0.15 + Math.random() * (icy ? 1.25 : 0.95)) * vw + "px");
-      berry.style.setProperty("--ty", -(0.1 + Math.random() * (icy ? 0.95 : 0.75)) * vh + "px");
-      berry.style.setProperty("--tr", (Math.random() * (icy ? 1080 : 720) - (icy ? 540 : 360)) + "deg");
-      berry.style.animationDelay = Math.round(Math.random() * 220) + "ms";
-      berry.style.animationDuration = icy ? (1.3 + Math.random() * 0.35) + "s" : "";
-      document.body.appendChild(berry);
-      (function (el) {
-        el.addEventListener("animationend", function () {
-          el.remove();
-        });
-      })(berry);
-    }
+    var runner = document.createElement("div");
+    runner.className = "berry-runner";
+    runner.style.setProperty("--runner-img", "url(\"" + BERRY_IMG[fromTheme] + "\")");
+    runner.style.setProperty("--size", rect.width + "px");
+    // Start near the left edge (not at the toggle's own position, which
+    // already sits at the far right) so the sprint is actually visible
+    // crossing the screen, at the same height the toggle sits at.
+    runner.style.left = "-70px";
+    runner.style.top = rect.top + "px";
+    document.body.appendChild(runner);
+    runner.addEventListener("animationend", function () {
+      runner.remove();
+    });
   }
 
   toggle.addEventListener("click", function () {
     if (toggle.classList.contains("popping")) return;
 
-    var next = currentTheme() === "icy" ? "warm" : "icy";
-    overlay.style.setProperty("--wash-color", THEME_COLORS[next]);
+    var leaving = currentTheme();
+    var next = leaving === "icy" ? "warm" : "icy";
+    var waveImg = next === "icy" ? randomBlueberryImg() : BERRY_IMG.warm;
+
+    if (reduceMotion) {
+      html.setAttribute("data-theme", next);
+      localStorage.setItem("sallee-theme", next);
+      return;
+    }
 
     toggle.classList.add("popping");
-    overlay.classList.remove("washing");
-    // force reflow so the animation can restart every click
-    void overlay.offsetWidth;
-    overlay.classList.add("washing");
-    spawnTumble(next);
+
+    setTimeout(function () { spawnRunner(leaving); }, RUN_DELAY);
+
+    setTimeout(function () {
+      overlay.style.setProperty("--wave-img", "url(\"" + waveImg + "\")");
+      overlay.classList.remove("washing");
+      // force reflow so the animation can restart every click
+      void overlay.offsetWidth;
+      overlay.classList.add("washing");
+    }, WAVE_DELAY);
 
     setTimeout(function () {
       html.setAttribute("data-theme", next);
       localStorage.setItem("sallee-theme", next);
-    }, 480);
+    }, SWAP_AT);
 
     setTimeout(function () {
       toggle.classList.remove("popping");
       overlay.classList.remove("washing");
-    }, 950);
+    }, CLEANUP_AT);
   });
 })();

@@ -104,7 +104,9 @@ html.loaded .hero-deco-dragonfly {
 .reveal.in-view { opacity: 1; transform: none; }
 
 /* =============================================
-   Strawberry theme toggle: squish + tumble
+   Strawberry theme toggle: squish reaction
+   (the run + wave animation lives in sections.css,
+   next to .berry-runner / .theme-wash-overlay)
    ============================================= */
 .berry-toggle.popping img { animation: berrySquish 0.5s ease; }
 @keyframes berrySquish {
@@ -112,24 +114,6 @@ html.loaded .hero-deco-dragonfly {
   30% { transform: scale(0.78, 1.18) rotate(-10deg); }
   60% { transform: scale(1.12, 0.9) rotate(6deg); }
   100% { transform: scale(1) rotate(0deg); }
-}
-.berry-tumble {
-  position: fixed;
-  width: var(--size, 46px);
-  height: var(--size, 46px);
-  background-image: url("../assets/icons/berry-toggle.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  z-index: 750;
-  opacity: 0;
-  animation: berryTumble 1.3s cubic-bezier(0.33, 0, 0.55, 1) forwards;
-}
-@keyframes berryTumble {
-  0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.5); }
-  10% { opacity: 1; }
-  85% { opacity: 1; }
-  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)) scale(1); }
 }
 
 /* =============================================
