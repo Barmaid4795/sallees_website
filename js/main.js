@@ -64,7 +64,7 @@
     var vw = window.innerWidth;
     var vh = window.innerHeight;
 
-    var SPRITE = 58, CANOPY_H = 30, STRING_LEN = 14, RIG_W = 86;
+    var SPRITE = 58, CANOPY_H = 22, STRING_LEN = 26, RIG_W = 70;
     var rigH = SPRITE + STRING_LEN + CANOPY_H;
 
     // Mirrors .berry-toggle's fixed right:22px/bottom:22px/58px box in

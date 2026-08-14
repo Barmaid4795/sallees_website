@@ -17,13 +17,13 @@
   // Keep these in sync with the durations set on .berry-runner /
   // .berry-tornado.storming in sections.css.
   var RUN_DURATION = 2400;   // matches --run-duration on .berry-runner
-  var STORM_DURATION = 2000; // matches the "storming" animation-duration
+  var STORM_DURATION = 3200; // matches the "storming" animation-duration — slower slide in/out
 
   var RUN_DELAY = 0; // runner (with legs) sets off immediately
-  // The berryRun keyframes put the runner at 66vw (2/3 of the screen) at
-  // its 64% keyframe — keyframe percentages are fixed points in time
-  // regardless of easing, so 64% of RUN_DURATION is exactly that moment.
-  var STORM_DELAY = Math.round(RUN_DURATION * 0.64);
+  // Storm now arrives much sooner in the chase — around a third of the
+  // way across, not two-thirds — so it feels like it's bearing down on
+  // the runner rather than lagging behind.
+  var STORM_DELAY = Math.round(RUN_DURATION * 0.32);
   // Theme flips while the tornado is mid-dwell, fully overhead (its
   // keyframes hold full coverage from 48%-62% of STORM_DURATION).
   var SWAP_AT = STORM_DELAY + Math.round(STORM_DURATION * 0.54);
@@ -45,9 +45,9 @@
     return html.getAttribute("data-theme") === "warm" ? "warm" : "icy";
   }
 
-  var TORNADO_RINGS = 7;
-  var BERRIES_PER_RING = 3;
-  var CLOUD_LEFTS = ["20%", "44%", "66%"];
+  var TORNADO_RINGS = 11;
+  var BERRIES_PER_RING = 5;
+  var CLOUD_LEFTS = ["12%", "30%", "48%", "66%", "84%"];
 
   function fillStorm(next) {
     storm.innerHTML = "";
@@ -63,24 +63,28 @@
     funnel.className = "tornado-funnel";
     for (var r = 0; r < TORNADO_RINGS; r++) {
       var t = r / (TORNADO_RINGS - 1); // 0 (top, narrow) -> 1 (bottom, wide)
-      var radius = 14 + t * 130;
-      var orbitDur = (1.7 - t * 1.1).toFixed(2) + "s"; // spins fastest near the narrow top
       var orbitDir = r % 2 === 0 ? "normal" : "reverse"; // alternating rings for a churning look
       for (var b = 0; b < BERRIES_PER_RING; b++) {
+        // Jitter radius and speed per berry (not just per ring) — a
+        // bigger, messier, more chaotic-looking funnel instead of neat
+        // concentric rings.
+        var radius = 18 + t * 230 + (Math.random() * 30 - 15);
+        var orbitDur = Math.max(0.35, 1.9 - t * 1.4 + (Math.random() * 0.6 - 0.3)).toFixed(2) + "s";
+
         var img = next === "icy" ? randomBlueberryImg() : BERRY_IMG.warm;
         var orbit = document.createElement("div");
         orbit.className = "tornado-orbit";
-        orbit.style.top = (t * 100) + "%";
+        orbit.style.top = (t * 100 + (Math.random() * 4 - 2)) + "%";
         orbit.style.setProperty("--orbit-dur", orbitDur);
         orbit.style.setProperty("--orbit-dir", orbitDir);
-        orbit.style.animationDelay = "-" + (Math.random() * 2).toFixed(2) + "s"; // random phase per berry
+        orbit.style.animationDelay = "-" + (Math.random() * 2.5).toFixed(2) + "s"; // random phase per berry
 
         var berry = document.createElement("div");
         berry.className = "tornado-berry";
         berry.style.setProperty("--tb-img", "url(\"" + img + "\")");
-        berry.style.setProperty("--tb-size", Math.round(16 + t * 14 + Math.random() * 8) + "px");
+        berry.style.setProperty("--tb-size", Math.round(18 + t * 26 + Math.random() * 14) + "px");
         berry.style.setProperty("--radius", Math.round(radius) + "px");
-        berry.style.setProperty("--tb-spin-dur", Math.round(500 + Math.random() * 500) + "ms");
+        berry.style.setProperty("--tb-spin-dur", Math.round(280 + Math.random() * 600) + "ms");
 
         orbit.appendChild(berry);
         funnel.appendChild(orbit);
