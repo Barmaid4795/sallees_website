@@ -1,23 +1,26 @@
 /* ============================================
    Palette system
-   Default = icy blue (blueberry) palette
+   Default = dark blueberry (icy blue, night mode) palette
    Alternate = warm multicolor palette
    ============================================ */
 
 :root {
-  /* icy blue / blueberry (default) */
-  --bg: #D8ECF4; /* invented light neutral, more saturated blue — Sallee's swatches were accents only */
-  --surface: #E9F6FA; /* light blue card surface, never pure white */
-  --text: #16232B; /* invented dark neutral, for body-text contrast */
-  --text-muted: #4D6472;
-  --accent-1: #095f92; /* Sallee's icy palette */
-  --accent-2: #2f5288;
-  --accent-3: #a1d0fc;
-  --accent-4: #b6e5ed;
-  --accent-5: #243e7d;
-  --border: rgba(22, 35, 43, 0.12);
-  --shadow: rgba(22, 35, 43, 0.16);
-  --ink-on-accent: #FFFCF4; /* off-white text/ink used on colored backgrounds — never pure white */
+  /* dark blueberry / icy blue (default) — same hue family as Sallee's
+     original icy swatches, re-tuned for a dark background. Every
+     text/background/button pairing below was checked against WCAG AA
+     (4.5:1) contrast, not just picked by eye. */
+  --bg: #0A1622; /* deep blueberry-night navy */
+  --surface: #101F30; /* slightly lighter card surface, still dark */
+  --text: #EAF4FA; /* icy off-white, for body-text contrast on dark bg */
+  --text-muted: #93AEC0;
+  --accent-1: #3E8FD0; /* brightened from Sallee's #095f92 so it reads as link/button color on dark bg */
+  --accent-2: #6C8FE0; /* brightened from Sallee's #2f5288 */
+  --accent-3: #74C6F0; /* de-pastelled from Sallee's #a1d0fc for contrast as text/UI */
+  --accent-4: #59B7C9; /* de-pastelled from Sallee's #b6e5ed for contrast as text/UI */
+  --accent-5: #7280DE; /* brightened from Sallee's #243e7d */
+  --border: rgba(234, 244, 250, 0.14);
+  --shadow: rgba(0, 0, 0, 0.5);
+  --ink-on-accent: #081018; /* dark ink for text sitting on the now-brighter accent colors */
 
   /* artwork areas always sit on warm milk white, regardless of theme */
   --art-bg: #FAF6F0;
@@ -48,5 +51,6 @@
   --accent-5: #4A6B53; /* moss green */
   --border: rgba(26, 26, 26, 0.12);
   --shadow: rgba(26, 26, 26, 0.14);
+  --ink-on-accent: #FFFCF4; /* warm theme's accents stay dark/medium, so keep light ink on top (default theme flipped this to a dark ink — warm needs its own value) */
   --bucket-fill: var(--accent-1);
 }

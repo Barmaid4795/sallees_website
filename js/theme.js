@@ -6,7 +6,7 @@
   var overlay = document.querySelector(".theme-wash-overlay");
   if (!toggle || !overlay) return;
 
-  var THEME_COLORS = { warm: "#5D51A1", icy: "#3E6B8A" };
+  var THEME_COLORS = { warm: "#5D51A1", icy: "#3E8FD0" };
   var TUMBLE_COUNT = 16;
   var BLUEBERRY_COUNT = 40;
   function randomBlueberryImg() {

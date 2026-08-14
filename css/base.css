@@ -160,7 +160,7 @@ img { max-width: 100%; display: block; }
   transform: translateY(-2px);
 }
 
-::selection { background: var(--accent-4); color: var(--text); }
+::selection { background: var(--accent-4); color: var(--ink-on-accent); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
