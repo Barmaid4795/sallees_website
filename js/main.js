@@ -71,6 +71,44 @@
     });
   }
 
+  // The parachute canopy: a real 5-gore dome (curved panels fanning out
+  // from an apex, alternating colors, scalloped hem) with rigging lines
+  // converging to a single ring — modeled directly on a reference photo
+  // of a candy-striped parachute carrying a berry. Built as one inline
+  // SVG string rather than CSS gradients/rotated divs, since that's the
+  // only way to get the curved gore edges, the scalloped hem, and the
+  // lines meeting at one exact point. Colors follow the fruit it's
+  // carrying: red/cream for the strawberry (icy theme), blue/cream for
+  // the blueberry (warm theme).
+  function buildParachuteCanopySVG(icy) {
+    var colorA = icy ? "#D6394C" : "#3E63B0";
+    var edgeA = icy ? "#A5233A" : "#28407C";
+    var colorB = "#FBF1DE";
+    var edgeB = "#DCC79A";
+    var cord = "#C9A66B";
+    return (
+      '<svg viewBox="0 0 104 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+        '<g stroke-linejoin="round" stroke-width="1.2">' +
+          '<path d="M52,4 Q17,17 4,42 Q14,52 24,42 Q32,17 52,4 Z" fill="' + colorA + '" stroke="' + edgeA + '"/>' +
+          '<path d="M52,4 Q32,17 24,42 Q33,52 42,42 Q45,17 52,4 Z" fill="' + colorB + '" stroke="' + edgeB + '"/>' +
+          '<path d="M52,4 Q45,17 42,42 Q52,52 62,42 Q59,17 52,4 Z" fill="' + colorA + '" stroke="' + edgeA + '"/>' +
+          '<path d="M52,4 Q59,17 62,42 Q71,52 80,42 Q72,17 52,4 Z" fill="' + colorB + '" stroke="' + edgeB + '"/>' +
+          '<path d="M52,4 Q72,17 80,42 Q90,52 100,42 Q87,17 52,4 Z" fill="' + colorA + '" stroke="' + edgeA + '"/>' +
+        '</g>' +
+        '<ellipse cx="40" cy="15" rx="17" ry="7" fill="#ffffff" opacity="0.22" transform="rotate(-10 40 15)"/>' +
+        '<g stroke="' + cord + '" stroke-width="1.3" stroke-linecap="round" opacity="0.9">' +
+          '<line x1="14" y1="52" x2="52" y2="84"/>' +
+          '<line x1="33" y1="52" x2="52" y2="84"/>' +
+          '<line x1="52" y1="52" x2="52" y2="84"/>' +
+          '<line x1="71" y1="52" x2="52" y2="84"/>' +
+          '<line x1="90" y1="52" x2="52" y2="84"/>' +
+          '<line x1="52" y1="88" x2="52" y2="92"/>' +
+        '</g>' +
+        '<circle cx="52" cy="84" r="4" fill="none" stroke="' + cord + '" stroke-width="1.6"/>' +
+      '</svg>'
+    );
+  }
+
   // One special berry — with its own little arms and legs, and a real
   // parachute canopy — floats down out of the rain and lands exactly on
   // the theme toggle's spot. It's the opposite fruit from the general
@@ -87,7 +125,10 @@
     var vw = window.innerWidth;
     var vh = window.innerHeight;
 
-    var SPRITE = 58, CANOPY_H = 26, STRING_LEN = 36, RIG_W = 108;
+    // Keep these in sync with the .berry-parachute-canopy box size in
+    // css/animations.css (width/height there = RIG_W / CANOPY_H + STRING_LEN)
+    // and with the viewBox in buildParachuteCanopySVG above.
+    var SPRITE = 58, CANOPY_H = 52, STRING_LEN = 40, RIG_W = 104;
     var rigH = SPRITE + STRING_LEN + CANOPY_H;
 
     // Mirrors .berry-toggle's fixed right:22px/bottom:22px/58px box in
@@ -116,19 +157,8 @@
 
     var canopy = document.createElement("div");
     canopy.className = "berry-parachute-canopy";
+    canopy.innerHTML = buildParachuteCanopySVG(icy);
     drop.appendChild(canopy);
-
-    // Four strings fanning out from the canopy's rim and converging to a
-    // single point above the berry (matching a real parachute's rigging
-    // lines), plus a little ring/knot right at that convergence point.
-    ["a", "b", "c", "d"].forEach(function (id) {
-      var s = document.createElement("span");
-      s.className = "berry-parachute-string berry-parachute-string-" + id;
-      drop.appendChild(s);
-    });
-    var ring = document.createElement("span");
-    ring.className = "berry-parachute-ring";
-    drop.appendChild(ring);
 
     var windA = document.createElement("span");
     windA.className = "berry-parachute-wind berry-parachute-wind-a";
