@@ -6,7 +6,6 @@
   // The same endpoint is also used in js/ama.js for custom AMA questions —
   // update both files together so everything lands in one inbox.
   var FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID";
-  var CONTACT_EMAIL = "salleeschaerer@gmail.com";
 
   var form = document.getElementById("contact-form");
   var status = document.getElementById("form-status");
@@ -28,13 +27,10 @@
     }
 
     if (!isConfigured) {
-      // Fallback until a real Formspree form ID is added: open the visitor's email client.
-      var mailto = "mailto:" + CONTACT_EMAIL +
-        "?subject=" + encodeURIComponent(subject || "Message from your website") +
-        "&body=" + encodeURIComponent(message + "\n\nFrom: " + email);
-      window.location.href = mailto;
-      status.textContent = "Opening your email app to send this message (in-site sending isn't wired up yet).";
-      status.className = "form-status";
+      // TODO(Sallee): form submissions can't be delivered until FORMSPREE_ENDPOINT
+      // above is set to a real form ID from https://formspree.io.
+      status.textContent = "Sorry, the contact form isn't fully set up yet — please check back soon.";
+      status.className = "form-status error";
       return;
     }
 
@@ -56,7 +52,7 @@
         }
       })
       .catch(function () {
-        status.textContent = "Something went wrong — please email " + CONTACT_EMAIL + " directly.";
+        status.textContent = "Something went wrong — please try again in a moment.";
         status.className = "form-status error";
       });
   });

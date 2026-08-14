@@ -42,7 +42,6 @@
   // Same Formspree form as js/contact.js — visitor-submitted AMA questions land
   // in the same inbox. TODO(Sallee): update this alongside the one in contact.js.
   var FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID";
-  var CONTACT_EMAIL = "salleeschaerer@gmail.com";
   var isFormspreeConfigured = FORMSPREE_ENDPOINT.indexOf("REPLACE_WITH_YOUR_FORM_ID") === -1;
 
   var chips = document.querySelectorAll(".ama-chip[data-qa]");
@@ -57,11 +56,9 @@
 
   function sendCustomQuestion(question) {
     if (!isFormspreeConfigured) {
-      var mailto = "mailto:" + CONTACT_EMAIL +
-        "?subject=" + encodeURIComponent("Ask Me Anything — visitor question") +
-        "&body=" + encodeURIComponent(question);
-      window.location.href = mailto;
-      if (customStatus) customStatus.textContent = "Opening your email app so you can send this question directly.";
+      // TODO(Sallee): AMA questions can't be delivered until FORMSPREE_ENDPOINT
+      // above is set to a real form ID from https://formspree.io.
+      if (customStatus) customStatus.textContent = "Sorry, question submissions aren't fully set up yet — please check back soon.";
       return;
     }
     if (customStatus) customStatus.textContent = "Sending your question…";
@@ -74,11 +71,11 @@
         if (customStatus) {
           customStatus.textContent = res.ok
             ? "Sent! Sallee will get your question."
-            : "Something went wrong — please email " + CONTACT_EMAIL + " directly.";
+            : "Something went wrong — please try again in a moment.";
         }
       })
       .catch(function () {
-        if (customStatus) customStatus.textContent = "Something went wrong — please email " + CONTACT_EMAIL + " directly.";
+        if (customStatus) customStatus.textContent = "Something went wrong — please try again in a moment.";
       });
   }
 
