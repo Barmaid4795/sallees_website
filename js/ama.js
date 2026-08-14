@@ -14,7 +14,7 @@
   var QA = {
     pricing: {
       q: "What is your pricing structure?",
-      a: "It depends on the piece — commissions usually start with a flat design fee, plus scope for size and medium. I'll always send a clear quote before starting.",
+      a: "It depends on the piece — commissions usually start with a flat design fee, plus additional cost based on size and medium. I'll always send a clear quote before starting.",
       asker: "bird",
       answerer: "crocodile"
     },
@@ -26,13 +26,13 @@
     },
     recent: {
       q: "What have you worked on recently?",
-      a: "Most recently, I have been working on the University of Calgary's academic student probation initiative, as well as a communication media film mural, as well as Orca 2026 acrylic painting.",
+      a: "Most recently, I have been working on the University of Calgary's academic student-probation initiative, a communications media film mural, and an Orca 2026 acrylic painting.",
       asker: "bird",
       answerer: "frog"
     },
     engagement: {
       q: "How do you typically start a new engagement?",
-      a: "With a conversation about your vision, timeline, and budget — then I sketch a couple of directions before we commit to a final concept together. Once we're aligned, I send over a contract and a quote, and work begins after both are signed off.",
+      a: "It starts with a conversation about your vision, timeline, and budget. Then I sketch a couple of directions before we commit to a final concept together. Once we're aligned, I send over a contract and a quote, and work begins once both are signed.",
       asker: "crocodile",
       answerer: "bird"
     }
