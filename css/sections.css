@@ -739,6 +739,17 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   place-items: center;
   cursor: pointer;
   z-index: 700;
+  /* stays invisible until the parachute berry (js/main.js) actually
+     lands here — .ready is added at that exact moment */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.6);
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.berry-toggle.ready {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
 }
 .berry-toggle img {
   grid-area: 1 / 1;
@@ -836,6 +847,35 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 @keyframes armBend {
   0%, 100% { transform: rotate(10deg); }
   50% { transform: rotate(38deg); }
+}
+/* the parachuting berry reuses the same limb markup, but relaxed —
+   dangling and gently swaying rather than mid-sprint. Selector
+   specificity (.berry-parachute ...) beats the plain .berry-leg-a etc.
+   rules above. */
+.berry-parachute .berry-leg-a { animation: dangleLegA 2100ms ease-in-out 700ms infinite; }
+.berry-parachute .berry-leg-b { animation: dangleLegB 2100ms ease-in-out 700ms infinite; }
+.berry-parachute .berry-arm-back { animation: dangleArmBack 2100ms ease-in-out 700ms infinite; }
+.berry-parachute .berry-arm-front { animation: dangleArmFront 2100ms ease-in-out 700ms infinite; }
+.berry-parachute .berry-limb .berry-limb-lower { animation: dangleLower 2100ms ease-in-out 700ms infinite; }
+@keyframes dangleLegA {
+  0%, 100% { transform: rotate(-18deg); }
+  50% { transform: rotate(-8deg); }
+}
+@keyframes dangleLegB {
+  0%, 100% { transform: rotate(14deg); }
+  50% { transform: rotate(4deg); }
+}
+@keyframes dangleArmBack {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(32deg); }
+}
+@keyframes dangleArmFront {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(-32deg); }
+}
+@keyframes dangleLower {
+  0%, 100% { transform: rotate(6deg); }
+  50% { transform: rotate(-4deg); }
 }
 /* wind/speed lines trailing behind (to the right, since the runner
    moves right-to-left) — only visible while running */

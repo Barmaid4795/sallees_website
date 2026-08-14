@@ -15,7 +15,9 @@ html.loaded .hero-kicker { animation-delay: 0.35s; }
 html.loaded .hero-portrait-frame { animation-delay: 0.6s; }
 html.loaded .hero-actions { animation-delay: 0.95s; }
 html.loaded .about-half { animation-delay: 1.15s; }
-html.loaded .berry-toggle { animation-delay: 1.9s; }
+/* .berry-toggle no longer uses this generic fall-in — it stays hidden
+   until the parachute berry (js/main.js) actually lands on it; see
+   .berry-toggle / .berry-toggle.ready in css/sections.css */
 
 @keyframes fallIntoPlace {
   0% {
@@ -91,6 +93,82 @@ html.loaded .hero-deco-dragonfly {
   78% { transform: translate(var(--tx), calc(var(--ty) - 12px)) rotate(var(--tr)); }
   90% { opacity: 1; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)); }
   100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)); }
+}
+
+/* the one special berry — with its own little arms/legs and a real
+   parachute canopy — that floats down out of the rain, drifting in from
+   the horizontal center of the screen over to the theme toggle's corner
+   as it descends, and lands exactly on the toggle's spot. Landing stays
+   put (no fade-out) so it reads as becoming the toggle's icon. Body/limb
+   markup reuses .berry-runner-sprite / .berry-limb / .berry-leg* /
+   .berry-arm* from the toggle-run sequence above, with their motion
+   overridden below to a relaxed dangle instead of a sprint. */
+.berry-parachute {
+  position: fixed;
+  pointer-events: none;
+  z-index: 750;
+  opacity: 0;
+  animation: berryParachute 3100ms cubic-bezier(0.33, 0, 0.4, 1) 700ms both;
+}
+.berry-parachute-sprite {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--size, 58px);
+  height: var(--size, 58px);
+}
+.berry-parachute-canopy {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 86px;
+  height: 30px;
+  border-radius: 50% 50% 8% 8% / 100% 100% 14% 14%;
+  background: repeating-linear-gradient(90deg, var(--accent-1) 0 12px, var(--accent-3) 12px 24px);
+  box-shadow: 0 4px 10px -4px var(--shadow);
+}
+.berry-parachute-string {
+  position: absolute;
+  top: 30px;
+  width: 1.5px;
+  height: 14px;
+  background: var(--ink-on-accent);
+  opacity: 0.8;
+  transform-origin: top center;
+}
+.berry-parachute-string-l { left: 22%; transform: rotate(20deg); }
+.berry-parachute-string-r { right: 22%; transform: rotate(-20deg); }
+.berry-parachute-wind {
+  position: absolute;
+  top: 55%;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to right, transparent, var(--ink-on-accent), transparent);
+  opacity: 0;
+  animation: parachuteGust 1300ms ease-in-out infinite;
+}
+.berry-parachute-wind-a { left: -26px; animation-delay: 1300ms; }
+.berry-parachute-wind-b { right: -26px; top: 68%; animation-delay: 1950ms; }
+@keyframes parachuteGust {
+  0%, 100% { opacity: 0; transform: translateX(0); }
+  45% { opacity: 0.7; }
+  50% { transform: translateX(-8px); }
+}
+/* drifts from center-screen over to the toggle's corner while
+   descending — small side-to-side jitter layered on top of the main
+   rightward glide for a natural sway, not a straight diagonal line */
+@keyframes berryParachute {
+  0% { opacity: 0; transform: translate(0, 0) rotate(-6deg) scale(0.9); }
+  6% { opacity: 1; }
+  20% { transform: translate(calc(var(--tx) * 0.12 + 16px), calc(var(--ty) * 0.22)) rotate(7deg) scale(0.94); }
+  40% { transform: translate(calc(var(--tx) * 0.34 - 12px), calc(var(--ty) * 0.48)) rotate(-6deg) scale(0.97); }
+  60% { transform: translate(calc(var(--tx) * 0.6 + 14px), calc(var(--ty) * 0.72)) rotate(5deg) scale(1); }
+  80% { transform: translate(calc(var(--tx) * 0.85 - 6px), calc(var(--ty) * 0.92)) rotate(-3deg) scale(1); }
+  92% { transform: translate(var(--tx), var(--ty)) rotate(0deg) scale(1.12, 0.85); }
+  100% { opacity: 1; transform: translate(var(--tx), var(--ty)) rotate(0deg) scale(1); }
 }
 
 /* =============================================
