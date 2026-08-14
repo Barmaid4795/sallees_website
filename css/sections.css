@@ -796,9 +796,12 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   display: block;
   transition: opacity 0.4s ease;
 }
-.berry-icon-warm { opacity: 0; }
-:root[data-theme="warm"] .berry-icon-icy { opacity: 0; }
-:root[data-theme="warm"] .berry-icon-warm { opacity: 1; }
+/* the toggle shows the berry for the theme you'd switch TO, not the one
+   you're currently in — icy mode shows a strawberry (click for warm),
+   warm mode shows a blueberry (click for icy) */
+.berry-icon-icy { opacity: 0; }
+:root[data-theme="warm"] .berry-icon-warm { opacity: 0; }
+:root[data-theme="warm"] .berry-icon-icy { opacity: 1; }
 .berry-toggle:hover, .berry-toggle:focus-visible { transform: translateY(-3px) rotate(-8deg); }
 
 /* the berry runner: launches from the toggle, grows, and sprints across
