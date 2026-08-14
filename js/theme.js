@@ -16,7 +16,7 @@
 
   // Keep these in sync with the durations set on .berry-runner /
   // .theme-wash-overlay.washing in sections.css.
-  var RUN_DURATION = 900;   // matches --run-duration on .berry-runner
+  var RUN_DURATION = 2400;  // matches --run-duration on .berry-runner
   var WAVE_DURATION = 2000; // matches the "washing" animation-duration
 
   var RUN_DELAY = 0; // runner (with legs) sets off immediately
@@ -45,18 +45,79 @@
     return html.getAttribute("data-theme") === "warm" ? "warm" : "icy";
   }
 
+  var WAVE_BERRY_COUNT = 22;
+
+  function fillWaveBerries(next) {
+    overlay.innerHTML = "";
+    for (var i = 0; i < WAVE_BERRY_COUNT; i++) {
+      var img = next === "icy" ? randomBlueberryImg() : BERRY_IMG.warm;
+      var b = document.createElement("div");
+      b.className = "wave-berry";
+      b.style.setProperty("--wb-img", "url(\"" + img + "\")");
+      b.style.setProperty("--wb-size", (22 + Math.random() * 30) + "px");
+      b.style.setProperty("--wb-duration", (600 + Math.random() * 900) + "ms");
+      b.style.setProperty("--wb-bob-duration", (900 + Math.random() * 900) + "ms");
+      // Scattered through the water's fill area (bottom ~70% of the
+      // screen); the overlay's own clip-path hides anything that lands
+      // above the waterline, so this range can be a little generous.
+      b.style.left = (2 + Math.random() * 94) + "%";
+      b.style.top = (36 + Math.random() * 56) + "%";
+      overlay.appendChild(b);
+    }
+  }
+
   function spawnRunner(fromTheme) {
     var rect = toggle.getBoundingClientRect();
+    // Bigger than the toggle icon itself so it's easy to see mid-sprint —
+    // the berryRun keyframes grow it further still while it runs.
+    var size = rect.width * 2.3;
+
     var runner = document.createElement("div");
     runner.className = "berry-runner";
-    runner.style.setProperty("--runner-img", "url(\"" + BERRY_IMG[fromTheme] + "\")");
-    runner.style.setProperty("--size", rect.width + "px");
+    runner.style.setProperty("--size", size + "px");
     runner.style.setProperty("--run-duration", RUN_DURATION + "ms");
     // Start just off the right edge (roughly where the toggle already
-    // lives) and sprint left across the whole screen, at the same height
-    // the toggle sits at.
+    // lives) and sprint left across the whole screen. Anchored by
+    // "bottom" (not "top") with a healthy margin so the enlarged sprite
+    // and its legs stay clear of the bottom edge of the viewport instead
+    // of getting clipped.
     runner.style.right = "-70px";
-    runner.style.top = rect.top + "px";
+    runner.style.bottom = "70px";
+
+    for (var i = 0; i < 3; i++) {
+      var wind = document.createElement("span");
+      wind.className = "berry-wind";
+      runner.appendChild(wind);
+    }
+
+    var sprite = document.createElement("div");
+    sprite.className = "berry-runner-sprite";
+
+    function makeLimb(cls) {
+      var limb = document.createElement("div");
+      limb.className = "berry-limb " + cls;
+      var lower = document.createElement("div");
+      lower.className = "berry-limb-lower";
+      limb.appendChild(lower);
+      return limb;
+    }
+
+    // Paint order matters here: the back arm goes in before the body
+    // image so the round berry occludes most of it (reads as "the other
+    // side" of the body), then legs and the front arm paint on top.
+    sprite.appendChild(makeLimb("berry-arm berry-arm-back"));
+
+    var body = document.createElement("div");
+    body.className = "berry-runner-body";
+    body.style.setProperty("--runner-img", "url(\"" + BERRY_IMG[fromTheme] + "\")");
+    sprite.appendChild(body);
+
+    sprite.appendChild(makeLimb("berry-leg berry-leg-a"));
+    sprite.appendChild(makeLimb("berry-leg berry-leg-b"));
+    sprite.appendChild(makeLimb("berry-arm berry-arm-front"));
+
+    runner.appendChild(sprite);
+
     document.body.appendChild(runner);
     runner.addEventListener("animationend", function () {
       runner.remove();
@@ -82,6 +143,7 @@
 
     setTimeout(function () {
       overlay.style.setProperty("--wave-img", "url(\"" + waveImg + "\")");
+      fillWaveBerries(next);
       overlay.classList.remove("washing");
       // force reflow so the animation can restart every click
       void overlay.offsetWidth;
@@ -96,6 +158,7 @@
     setTimeout(function () {
       toggle.classList.remove("popping");
       overlay.classList.remove("washing");
+      overlay.innerHTML = "";
     }, CLEANUP_AT);
   });
 })();

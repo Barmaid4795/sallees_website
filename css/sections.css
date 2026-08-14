@@ -752,77 +752,208 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
 :root[data-theme="warm"] .berry-icon-warm { opacity: 1; }
 .berry-toggle:hover, .berry-toggle:focus-visible { transform: translateY(-3px) rotate(-8deg); }
 
-/* the berry runner: launches from the toggle, sprints across the screen
-   on two little kicking legs, chased by the wave below */
+/* the berry runner: launches from the toggle, grows, and sprints across
+   the screen on two little kicking legs with wind streaks trailing
+   behind it, chased by the wave below. Structure: .berry-runner (the
+   moving/scaling wrapper) > .berry-wind x3 (trailing speed lines) +
+   .berry-runner-sprite (the actual berry image + legs). */
 .berry-runner {
   position: fixed;
   z-index: 780;
-  width: var(--size, 54px);
-  height: var(--size, 54px);
+  width: var(--size, 110px);
+  height: var(--size, 110px);
   pointer-events: none;
+  animation: berryRun var(--run-duration, 900ms) cubic-bezier(0.45, 0, 0.4, 1) forwards;
+}
+.berry-runner-sprite {
+  position: absolute;
+  inset: 0;
+}
+/* the berry image itself sits between the two arms in DOM/paint order,
+   so the "back" arm is partly hidden behind the round body — like it's
+   on the far side of it — while the "front" arm paints on top */
+.berry-runner-body {
+  position: absolute;
+  inset: 0;
   background-image: var(--runner-img);
   background-size: contain;
   background-repeat: no-repeat;
-  animation: berryRun var(--run-duration, 900ms) cubic-bezier(0.45, 0, 0.4, 1) forwards;
 }
-/* thin line-art legs (not solid blobs) — a skinny stroke per leg */
-.berry-runner::before,
-.berry-runner::after {
-  content: "";
+/* thin line-art limbs (not solid blobs) — two-segment legs and arms
+   that bend at the knee/elbow as they swing, alternating like a real
+   running gait: exact opposite phase, one limb forward while its pair
+   is back, arms counter-swinging against their same-side leg */
+.berry-limb {
   position: absolute;
-  bottom: -6px;
-  width: 3px;
-  height: 32%;
-  border-radius: 2px;
+  width: 3.5%;
+  height: 24%;
+  border-radius: 3px;
   background: var(--ink-on-accent);
   opacity: 0.85;
   transform-origin: top center;
-  animation: berryLegKick 200ms ease-in-out infinite;
 }
-.berry-runner::before { left: 34%; animation-delay: 0ms; }
-.berry-runner::after { left: 60%; animation-delay: 100ms; }
-@keyframes berryLegKick {
-  0%, 100% { transform: rotate(-26deg) scaleY(1); }
-  50% { transform: rotate(26deg) scaleY(0.86); }
+.berry-limb-lower {
+  position: absolute;
+  top: 92%;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: var(--ink-on-accent);
+  border-radius: 3px;
+  transform-origin: top center;
 }
-/* runs right-to-left, starting from off the right edge */
+.berry-leg { bottom: -4%; }
+.berry-leg-a { left: 34%; animation: limbSwing 260ms ease-in-out infinite; }
+.berry-leg-a .berry-limb-lower { animation: legBend 260ms ease-in-out infinite; }
+.berry-leg-b { left: 60%; animation: limbSwing 260ms ease-in-out infinite 130ms; }
+.berry-leg-b .berry-limb-lower { animation: legBend 260ms ease-in-out infinite 130ms; }
+
+.berry-arm { top: 28%; height: 20%; opacity: 0.7; }
+/* the back arm is slightly smaller/dimmer and tucked in — it's mostly
+   hidden behind the body, just peeking out to read as "the other side" */
+.berry-arm-back { left: 22%; width: 3%; height: 17%; opacity: 0.45; animation: armSwing 260ms ease-in-out infinite 130ms; }
+.berry-arm-back .berry-limb-lower { animation: armBend 260ms ease-in-out infinite 130ms; }
+.berry-arm-front { left: 80%; animation: armSwing 260ms ease-in-out infinite 0ms; }
+.berry-arm-front .berry-limb-lower { animation: armBend 260ms ease-in-out infinite 0ms; }
+
+@keyframes limbSwing {
+  0%, 100% { transform: rotate(-34deg); }
+  50% { transform: rotate(34deg); }
+}
+/* relative to the upper leg: sharply bent (foot tucked up) when the leg
+   is swung back, nearly straight when reaching forward */
+@keyframes legBend {
+  0%, 100% { transform: rotate(-58deg); }
+  50% { transform: rotate(8deg); }
+}
+@keyframes armSwing {
+  0%, 100% { transform: rotate(30deg); }
+  50% { transform: rotate(-30deg); }
+}
+@keyframes armBend {
+  0%, 100% { transform: rotate(10deg); }
+  50% { transform: rotate(38deg); }
+}
+/* wind/speed lines trailing behind (to the right, since the runner
+   moves right-to-left) — only visible while running */
+.berry-wind {
+  position: absolute;
+  left: 100%;
+  height: 3px;
+  width: 55%;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--ink-on-accent), transparent);
+  opacity: 0;
+  transform-origin: left center;
+  animation: windStreak 240ms ease-out infinite;
+}
+.berry-wind:nth-child(1) { top: 20%; width: 50%; animation-delay: 0ms; }
+.berry-wind:nth-child(2) { top: 48%; width: 68%; animation-delay: 80ms; }
+.berry-wind:nth-child(3) { top: 76%; width: 42%; animation-delay: 160ms; }
+@keyframes windStreak {
+  0% { opacity: 0; transform: scaleX(0.25); }
+  35% { opacity: 0.8; }
+  100% { opacity: 0; transform: scaleX(1); }
+}
+/* runs right-to-left, starting from off the right edge, growing larger
+   through the sprint so it reads clearly against the page */
 @keyframes berryRun {
-  0% { transform: translate(0, 0) scale(0.55) rotate(8deg); opacity: 0; }
-  8% { opacity: 1; transform: translate(-6vw, -6px) scale(1) rotate(-2deg); }
-  22% { transform: translate(-18vw, -20px) scale(1.03, 0.93) rotate(5deg); }
-  36% { transform: translate(-34vw, 0) scale(0.95, 1.06) rotate(-4deg); }
-  50% { transform: translate(-50vw, -18px) scale(1.03, 0.93) rotate(5deg); }
-  64% { transform: translate(-66vw, 0) scale(0.95, 1.06) rotate(-4deg); }
-  80% { transform: translate(-84vw, -14px) scale(1.02, 0.95) rotate(2deg); }
-  100% { transform: translate(-112vw, 6px) scale(0.9) rotate(-6deg); opacity: 1; }
+  0% { transform: translate(0, 0) scale(0.45) rotate(8deg); opacity: 0; }
+  8% { opacity: 1; transform: translate(-6vw, -6px) scale(1.05) rotate(-2deg); }
+  22% { transform: translate(-18vw, -20px) scale(1.22, 1.1) rotate(5deg); }
+  36% { transform: translate(-34vw, 0) scale(1.12, 1.26) rotate(-4deg); }
+  50% { transform: translate(-50vw, -18px) scale(1.24, 1.12) rotate(5deg); }
+  64% { transform: translate(-66vw, 0) scale(1.12, 1.24) rotate(-4deg); }
+  80% { transform: translate(-84vw, -14px) scale(1.18, 1.08) rotate(2deg); }
+  100% { transform: translate(-112vw, 6px) scale(1.05) rotate(-6deg); opacity: 1; }
 }
 
-/* the wave: an actual ocean-wave shaped tide of the incoming theme's
-   berries, washing right-to-left across the whole screen (chasing the
-   runner, which now also runs right-to-left) with a curling, foamy crest
-   on its leading (left) edge — the moment it's fully covering is when the
-   theme actually swaps underneath it */
+/* the wave: an actual ocean wave of the incoming theme's berries, rising
+   from the bottom of the screen to about 70% of its height, with a
+   curling whitewater crest on its leading (left) edge, washing
+   right-to-left (chasing the runner, which also runs right-to-left).
+   Individual berries tumble in the water (.wave-berry, spawned in JS) on
+   top of a tiled texture layer — the moment it's fully covering is when
+   the theme actually swaps underneath it. */
 .theme-wash-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 800;
-  background-repeat: repeat;
-  background-size: 60px 60px;
+  overflow: hidden;
   background-image:
-    linear-gradient(to left, transparent 0%, transparent 84%, rgba(255, 255, 255, 0.75) 90%, rgba(255, 255, 255, 0.15) 95%, transparent 100%),
+    /* dense, layered whitewater foam right at the crest */
+    linear-gradient(to left,
+      transparent 0%, transparent 78%,
+      rgba(255, 255, 255, 0.3) 83%,
+      rgba(255, 255, 255, 0.92) 88%,
+      rgba(255, 255, 255, 0.97) 91%,
+      rgba(255, 255, 255, 0.5) 95%,
+      transparent 100%),
+    /* water depth: deep near the bottom/trailing side, lighter near the
+       surface/leading crest, so it reads as a body of water */
+    linear-gradient(115deg, rgba(9, 60, 102, 0.6) 0%, rgba(23, 100, 152, 0.4) 45%, rgba(140, 200, 230, 0.12) 100%),
     var(--wave-img);
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: 100% 100%, 100% 100%, 56px 56px;
   clip-path: polygon(
-    100% 0%, 10% 0%, 3% 5%, 11% 11%, 2% 17%, 10% 23%,
-    3% 29%, 12% 36%, 4% 43%, 10% 50%, 2% 57%, 11% 64%,
-    3% 71%, 10% 78%, 2% 85%, 11% 92%, 5% 97%, 10% 100%,
-    100% 100%
+    100% 100%, 100% 30%, 92% 27%, 86% 32%, 80% 26%, 74% 31%,
+    68% 27%, 62% 32%, 56% 26%, 50% 30%, 44% 25%, 38% 31%,
+    32% 26%, 26% 29%, 21% 22%, 17% 13%, 14% 19%, 11% 7%,
+    8% 15%, 5% 4%, 2% 11%, 0% 2%,
+    0% 100%
   );
   transform: translateX(125%);
 }
+/* the curling barrel lip — a glowing foam curl right at the crest tip,
+   surging as the wave hits full coverage */
+.theme-wash-overlay::before {
+  content: "";
+  position: absolute;
+  left: -6%;
+  top: -4%;
+  width: 34%;
+  height: 55%;
+  background: radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 30%, transparent 65%);
+  filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+}
+.theme-wash-overlay.washing::before {
+  animation: barrelLip 2000ms ease-out forwards;
+}
+@keyframes barrelLip {
+  0%, 30% { opacity: 0; transform: scale(0.6) rotate(-10deg); }
+  48% { opacity: 1; transform: scale(1.08) rotate(4deg); }
+  62% { opacity: 1; transform: scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: scale(0.9) rotate(-6deg); }
+}
+/* individual berries tumbling/toppling in the water — spawned in JS,
+   scattered through the wave's fill area */
+.wave-berry {
+  position: absolute;
+  width: var(--wb-size, 34px);
+  height: var(--wb-size, 34px);
+  background-image: var(--wb-img);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.95;
+  animation: waveBerryTumble var(--wb-duration, 900ms) linear infinite, waveBerryBob var(--wb-bob-duration, 1400ms) ease-in-out infinite;
+}
+@keyframes waveBerryTumble {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes waveBerryBob {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -10px; }
+}
 .theme-wash-overlay.washing {
   /* keep in sync with WAVE_DURATION in theme.js */
-  animation: berryWave 2000ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation:
+    berryWave 2000ms cubic-bezier(0.65, 0, 0.35, 1) forwards,
+    waveCrash 2000ms ease-out forwards,
+    waterFlow 850ms linear infinite;
 }
 @keyframes berryWave {
   0% { transform: translateX(125%); }
@@ -830,6 +961,21 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   62% { transform: translateX(0%); }
   100% { transform: translateX(-125%); }
 }
+/* the berry-tile layer continuously scrolls (one full 56px tile per
+   loop, so it's seamless) — real flowing-water motion, not a frozen
+   pattern */
+@keyframes waterFlow {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 0 0, 0 0, -56px 0; }
+}
+/* a turbo brightness+saturation flash right as the wave hits full
+   coverage, to sell the "crash" moment */
+@keyframes waveCrash {
+  0%, 44% { filter: brightness(1) saturate(1); }
+  48% { filter: brightness(1.45) saturate(1.35); }
+  56% { filter: brightness(1) saturate(1); }
+  100% { filter: brightness(1) saturate(1); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .berry-runner, .theme-wash-overlay.washing { animation: none; display: none; }
+  .berry-runner, .theme-wash-overlay.washing, .theme-wash-overlay.washing::before, .wave-berry { animation: none; display: none; }
 }
