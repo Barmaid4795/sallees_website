@@ -18,34 +18,57 @@
   // First-load berry rain — falls from underneath the .entrance-cloud
   // shapes (css/animations.css), lands bottom-left near the footer bear
   var CLOUD_CENTERS = [0.12, 0.36, 0.62, 0.85]; // matches .entrance-cloud-1..4 roughly
-  function spawnBerryRain() {
+
+  function spawnOneRainDrop(left, delayMs) {
     var icy = html.getAttribute("data-theme") !== "warm";
-    var count = icy ? 32 : 22;
-    var vw = window.innerWidth;
+    var berryImg = icy ? randomBlueberryImg() : "assets/icons/berry-toggle.png";
+    var size = icy ? (24 + Math.random() * 38) : (20 + Math.random() * 26);
+    var startTop = -(size + Math.random() * 40);
     var vh = window.innerHeight;
+    var landY = vh - (36 + Math.random() * 70);
+    var drop = document.createElement("div");
+    drop.className = "berry-rain-drop";
+    drop.style.setProperty("--size", size + "px");
+    drop.style.backgroundImage = "url(\"" + berryImg + "\")";
+    drop.style.left = left + "px";
+    drop.style.top = startTop + "px";
+    drop.style.setProperty("--ty", (landY - startTop) + "px");
+    drop.style.setProperty("--tx", Math.round(Math.random() * (icy ? 100 : 60) - (icy ? 50 : 30)) + "px");
+    drop.style.setProperty("--tr", Math.round(Math.random() * (icy ? 480 : 300) - (icy ? 240 : 150)) + "deg");
+    drop.style.animationDuration = (icy ? (1.0 + Math.random() * 0.8) : (1.1 + Math.random() * 0.6)) + "s";
+    drop.style.animationDelay = (delayMs != null ? delayMs : Math.round(Math.random() * 900)) + "ms";
+    document.body.appendChild(drop);
+    drop.addEventListener("animationend", function () { drop.remove(); });
+  }
+
+  function spawnBerryRain() {
+    var count = (html.getAttribute("data-theme") !== "warm") ? 32 : 22;
+    var vw = window.innerWidth;
     for (var i = 0; i < count; i++) {
-      var berryImg = icy ? randomBlueberryImg() : "assets/icons/berry-toggle.png";
-      var size = icy ? (24 + Math.random() * 38) : (20 + Math.random() * 26);
-      var startTop = -(size + Math.random() * 40);
       var cloudCenter = CLOUD_CENTERS[Math.floor(Math.random() * CLOUD_CENTERS.length)];
-      var left = Math.max(0, Math.min(vw - size, vw * cloudCenter + (Math.random() * 90 - 45)));
-      var landY = vh - (36 + Math.random() * 70);
-      var drop = document.createElement("div");
-      drop.className = "berry-rain-drop";
-      drop.style.setProperty("--size", size + "px");
-      drop.style.backgroundImage = "url(\"" + berryImg + "\")";
-      drop.style.left = left + "px";
-      drop.style.top = startTop + "px";
-      drop.style.setProperty("--ty", (landY - startTop) + "px");
-      drop.style.setProperty("--tx", Math.round(Math.random() * (icy ? 100 : 60) - (icy ? 50 : 30)) + "px");
-      drop.style.setProperty("--tr", Math.round(Math.random() * (icy ? 480 : 300) - (icy ? 240 : 150)) + "deg");
-      drop.style.animationDuration = (icy ? (1.0 + Math.random() * 0.8) : (1.1 + Math.random() * 0.6)) + "s";
-      drop.style.animationDelay = Math.round(Math.random() * 900) + "ms";
-      document.body.appendChild(drop);
-      (function (el) {
-        el.addEventListener("animationend", function () { el.remove(); });
-      })(drop);
+      var left = Math.max(0, Math.min(vw - 40, vw * cloudCenter + (Math.random() * 90 - 45)));
+      spawnOneRainDrop(left);
     }
+  }
+
+  // Clouds are interactive: hover glows them (pure CSS, see
+  // .entrance-cloud:hover), and clicking one shakes loose a little
+  // extra flurry of berries from right underneath it, with a quick
+  // brightness "poke" reaction on the cloud itself.
+  function wireCloudInteraction() {
+    document.querySelectorAll(".entrance-cloud").forEach(function (cloud) {
+      cloud.addEventListener("click", function () {
+        cloud.animate(
+          [{ filter: "brightness(1.4)" }, { filter: "brightness(1)" }],
+          { duration: 450, easing: "ease-out" }
+        );
+        var rect = cloud.getBoundingClientRect();
+        for (var i = 0; i < 5; i++) {
+          var left = rect.left + Math.random() * rect.width;
+          spawnOneRainDrop(left, Math.round(Math.random() * 200));
+        }
+      });
+    });
   }
 
   // One special berry — with its own little arms and legs, and a real
@@ -64,7 +87,7 @@
     var vw = window.innerWidth;
     var vh = window.innerHeight;
 
-    var SPRITE = 58, CANOPY_H = 22, STRING_LEN = 26, RIG_W = 70;
+    var SPRITE = 58, CANOPY_H = 26, STRING_LEN = 36, RIG_W = 108;
     var rigH = SPRITE + STRING_LEN + CANOPY_H;
 
     // Mirrors .berry-toggle's fixed right:22px/bottom:22px/58px box in
@@ -95,12 +118,17 @@
     canopy.className = "berry-parachute-canopy";
     drop.appendChild(canopy);
 
-    var stringL = document.createElement("span");
-    stringL.className = "berry-parachute-string berry-parachute-string-l";
-    drop.appendChild(stringL);
-    var stringR = document.createElement("span");
-    stringR.className = "berry-parachute-string berry-parachute-string-r";
-    drop.appendChild(stringR);
+    // Four strings fanning out from the canopy's rim and converging to a
+    // single point above the berry (matching a real parachute's rigging
+    // lines), plus a little ring/knot right at that convergence point.
+    ["a", "b", "c", "d"].forEach(function (id) {
+      var s = document.createElement("span");
+      s.className = "berry-parachute-string berry-parachute-string-" + id;
+      drop.appendChild(s);
+    });
+    var ring = document.createElement("span");
+    ring.className = "berry-parachute-ring";
+    drop.appendChild(ring);
 
     var windA = document.createElement("span");
     windA.className = "berry-parachute-wind berry-parachute-wind-a";
@@ -159,6 +187,7 @@
   });
   // Fallback in case 'load' already fired or is slow
   setTimeout(triggerEntrance, 1200);
+  wireCloudInteraction();
 
   // Mobile menu toggle
   var navToggle = document.querySelector(".nav-toggle");

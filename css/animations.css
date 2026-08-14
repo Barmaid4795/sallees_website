@@ -90,7 +90,22 @@ html.loaded .hero-deco-dragonfly {
   border-radius: 50px;
   opacity: 0;
   box-shadow: 0 8px 18px -10px var(--shadow);
+  /* interactive: cursor lands on the cloud shape itself, not the
+     pointer-events:none container. Only filter/box-shadow react to
+     hover/click — transform is already owned by cloudDrift below, so
+     we don't fight it for the same property. */
+  pointer-events: auto;
+  cursor: pointer;
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
 }
+.entrance-cloud:hover {
+  filter: brightness(1.18);
+  box-shadow: 0 10px 22px -8px var(--shadow);
+}
+/* the click "poke" reaction is driven by element.animate() in
+   js/main.js (Web Animations API), not a CSS class — that runs as an
+   independent animation layer, so it can't collide with the
+   animation-name: cloudDrift already running on this element below */
 .entrance-cloud::before,
 .entrance-cloud::after {
   content: "";
@@ -175,23 +190,40 @@ html.loaded .entrance-cloud {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 70px;
-  height: 22px;
+  width: 108px;
+  height: 26px;
   border-radius: 50% 50% 8% 8% / 100% 100% 20% 20%;
-  background: repeating-linear-gradient(90deg, var(--accent-1) 0 12px, var(--accent-3) 12px 24px);
-  box-shadow: 0 2px 4px -2px var(--shadow);
+  background: repeating-linear-gradient(90deg, var(--accent-1) 0 14px, var(--accent-3) 14px 28px);
+  box-shadow: 0 2px 5px -2px var(--shadow);
 }
+/* four rigging lines fanning out from the canopy's rim and converging
+   to a single point well above the berry (not two lines running
+   straight down into it) */
 .berry-parachute-string {
   position: absolute;
-  top: 22px;
+  top: 26px;
   width: 1.5px;
-  height: 26px;
+  height: 36px;
   background: var(--ink-on-accent);
-  opacity: 0.8;
+  opacity: 0.85;
   transform-origin: top center;
 }
-.berry-parachute-string-l { left: 26%; transform: rotate(16deg); }
-.berry-parachute-string-r { right: 26%; transform: rotate(-16deg); }
+.berry-parachute-string-a { left: 20px; transform: rotate(43deg); }
+.berry-parachute-string-b { left: 42px; transform: rotate(18deg); }
+.berry-parachute-string-c { left: 66px; transform: rotate(-18deg); }
+.berry-parachute-string-d { left: 88px; transform: rotate(-43deg); }
+/* the little ring/knot where all the lines meet, just above the berry */
+.berry-parachute-ring {
+  position: absolute;
+  top: 57px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-on-accent);
+  opacity: 0.9;
+}
 .berry-parachute-wind {
   position: absolute;
   top: 55%;
