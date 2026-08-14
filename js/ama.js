@@ -14,25 +14,25 @@
   var QA = {
     pricing: {
       q: "What is your pricing structure?",
-      a: "It depends on the piece — commissions usually start with a flat design fee, plus additional cost based on size and medium. I'll always send a clear quote before starting.",
+      a: "Depends on the piece! There's usually a flat design fee to start, and then it goes up a bit with size and medium. I'll always send you a quote before anything begins, so there are no surprises.",
       asker: "bird",
       answerer: "crocodile"
     },
     location: {
       q: "Where are you based?",
-      a: "I'm based in Alberta, Canada, and happy to work with clients remotely wherever they are.",
+      a: "Alberta, Canada — but most of what I do happens over email and video calls, so I'm happy to work with people anywhere.",
       asker: "crocodile",
       answerer: "frog"
     },
     recent: {
       q: "What have you worked on recently?",
-      a: "Most recently, I have been working on the University of Calgary's academic student-probation initiative, a communications media film mural, and an Orca 2026 acrylic painting.",
+      a: "Lately I've been juggling a few things — a project for the University of Calgary's academic student-probation initiative, a mural for a communications media film, and an acrylic painting called Orca 2026.",
       asker: "bird",
       answerer: "frog"
     },
     engagement: {
       q: "How do you typically start a new engagement?",
-      a: "It starts with a conversation about your vision, timeline, and budget. Then I sketch a couple of directions before we commit to a final concept together. Once we're aligned, I send over a contract and a quote, and work begins once both are signed.",
+      a: "Usually we just start talking — about your vision, your timeline, your budget. I'll sketch out a couple of directions from there, and we land on a final concept together. Once you're happy with it, I send over a contract and a quote, and we get moving as soon as those are signed.",
       asker: "crocodile",
       answerer: "bird"
     }
