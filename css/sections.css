@@ -848,6 +848,17 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   0%, 100% { transform: rotate(10deg); }
   50% { transform: rotate(38deg); }
 }
+/* limb color flips per fruit AND per context: strawberry limbs are
+   black while running, white while parachuting; blueberry limbs are
+   the reverse — white while running, black while parachuting. */
+.berry-runner .is-strawberry .berry-limb,
+.berry-runner .is-strawberry .berry-limb-lower { background: #1a1a1a; }
+.berry-runner .is-blueberry .berry-limb,
+.berry-runner .is-blueberry .berry-limb-lower { background: #ffffff; }
+.berry-parachute .is-strawberry .berry-limb,
+.berry-parachute .is-strawberry .berry-limb-lower { background: #ffffff; }
+.berry-parachute .is-blueberry .berry-limb,
+.berry-parachute .is-blueberry .berry-limb-lower { background: #1a1a1a; }
 /* the parachuting berry reuses the same limb markup, but relaxed —
    dangling and gently swaying rather than mid-sprint. Selector
    specificity (.berry-parachute ...) beats the plain .berry-leg-a etc.
@@ -911,114 +922,120 @@ html:not(.fine-pointer) .mural-caption { opacity: 1; transform: none; position: 
   100% { transform: translate(-112vw, 6px) scale(1.05) rotate(-6deg); opacity: 1; }
 }
 
-/* the wave: an actual ocean wave of the incoming theme's berries, rising
-   from the bottom of the screen to about 70% of its height, with a
-   curling whitewater crest on its leading (left) edge, washing
-   right-to-left (chasing the runner, which also runs right-to-left).
-   Individual berries tumble in the water (.wave-berry, spawned in JS) on
-   top of a tiled texture layer — the moment it's fully covering is when
-   the theme actually swaps underneath it. */
-.theme-wash-overlay {
+/* the storm: a couple of dark clouds gather, and a tornado of the
+   incoming theme's berries spins up beneath them, chasing the runner
+   right-to-left across the screen. The theme swaps the moment the
+   funnel is fully overhead. Structure (all spawned in JS):
+     .berry-tornado (sweep wrapper, translateX chase)
+       .storm-cloud x2-3
+       .tornado-funnel
+         .tornado-orbit x N   (pivots in place)
+           .tornado-berry     (offset by radius, orbits with its pivot)
+*/
+.berry-tornado {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 800;
   overflow: hidden;
-  background-image:
-    /* dense, layered whitewater foam right at the crest */
-    linear-gradient(to left,
-      transparent 0%, transparent 78%,
-      rgba(255, 255, 255, 0.3) 83%,
-      rgba(255, 255, 255, 0.92) 88%,
-      rgba(255, 255, 255, 0.97) 91%,
-      rgba(255, 255, 255, 0.5) 95%,
-      transparent 100%),
-    /* water depth: deep near the bottom/trailing side, lighter near the
-       surface/leading crest, so it reads as a body of water */
-    linear-gradient(115deg, rgba(9, 60, 102, 0.6) 0%, rgba(23, 100, 152, 0.4) 45%, rgba(140, 200, 230, 0.12) 100%),
-    var(--wave-img);
-  background-repeat: no-repeat, no-repeat, repeat;
-  background-size: 100% 100%, 100% 100%, 56px 56px;
-  clip-path: polygon(
-    100% 100%, 100% 30%, 92% 27%, 86% 32%, 80% 26%, 74% 31%,
-    68% 27%, 62% 32%, 56% 26%, 50% 30%, 44% 25%, 38% 31%,
-    32% 26%, 26% 29%, 21% 22%, 17% 13%, 14% 19%, 11% 7%,
-    8% 15%, 5% 4%, 2% 11%, 0% 2%,
-    0% 100%
-  );
-  transform: translateX(125%);
 }
-/* the curling barrel lip — a glowing foam curl right at the crest tip,
-   surging as the wave hits full coverage */
-.theme-wash-overlay::before {
+.storm-cloud {
+  position: absolute;
+  top: 4%;
+  width: 150px;
+  height: 50px;
+  background: #4a5568;
+  border-radius: 50px;
+  opacity: 0;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.5);
+}
+.storm-cloud::before,
+.storm-cloud::after {
   content: "";
   position: absolute;
-  left: -6%;
-  top: -4%;
-  width: 34%;
-  height: 55%;
-  background: radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 30%, transparent 65%);
-  filter: blur(3px);
-  opacity: 0;
-  pointer-events: none;
+  background: #4a5568;
+  border-radius: 50%;
 }
-.theme-wash-overlay.washing::before {
-  animation: barrelLip 2000ms ease-out forwards;
+.storm-cloud::before { width: 66px; height: 66px; top: -30px; left: 18px; }
+.storm-cloud::after { width: 54px; height: 54px; top: -22px; right: 20px; }
+.berry-tornado.storming .storm-cloud {
+  animation: stormCloudIn 2000ms ease-out forwards;
 }
-@keyframes barrelLip {
-  0%, 30% { opacity: 0; transform: scale(0.6) rotate(-10deg); }
-  48% { opacity: 1; transform: scale(1.08) rotate(4deg); }
-  62% { opacity: 1; transform: scale(1) rotate(0deg); }
-  100% { opacity: 0; transform: scale(0.9) rotate(-6deg); }
+@keyframes stormCloudIn {
+  0% { opacity: 0; transform: translateY(-24px) scale(0.8); }
+  22% { opacity: 0.95; transform: translateY(0) scale(1); }
+  80% { opacity: 0.95; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-10px) scale(0.94); }
 }
-/* individual berries tumbling/toppling in the water — spawned in JS,
-   scattered through the wave's fill area */
-.wave-berry {
+.tornado-funnel {
   position: absolute;
-  width: var(--wb-size, 34px);
-  height: var(--wb-size, 34px);
-  background-image: var(--wb-img);
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.95;
-  animation: waveBerryTumble var(--wb-duration, 900ms) linear infinite, waveBerryBob var(--wb-bob-duration, 1400ms) ease-in-out infinite;
+  top: 6%;
+  left: 50%;
+  width: 1px;
+  height: 74%;
 }
-@keyframes waveBerryTumble {
+.tornado-orbit {
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  animation-name: tornadoSpin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--orbit-dur, 1.2s);
+  animation-direction: var(--orbit-dir, normal);
+}
+@keyframes tornadoSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-@keyframes waveBerryBob {
-  0%, 100% { margin-top: 0; }
-  50% { margin-top: -10px; }
+.tornado-berry {
+  position: absolute;
+  width: var(--tb-size, 26px);
+  height: var(--tb-size, 26px);
+  margin: calc(var(--tb-size, 26px) / -2);
+  background-image: var(--tb-img);
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translateX(var(--radius, 40px));
+  animation: tornadoBerrySpin var(--tb-spin-dur, 700ms) linear infinite;
 }
-.theme-wash-overlay.washing {
-  /* keep in sync with WAVE_DURATION in theme.js */
-  animation:
-    berryWave 2000ms cubic-bezier(0.65, 0, 0.35, 1) forwards,
-    waveCrash 2000ms ease-out forwards,
-    waterFlow 850ms linear infinite;
+@keyframes tornadoBerrySpin {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
 }
-@keyframes berryWave {
-  0% { transform: translateX(125%); }
-  48% { transform: translateX(0%); }
-  62% { transform: translateX(0%); }
-  100% { transform: translateX(-125%); }
+.berry-tornado.storming {
+  animation: tornadoSweep 2000ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
-/* the berry-tile layer continuously scrolls (one full 56px tile per
-   loop, so it's seamless) — real flowing-water motion, not a frozen
-   pattern */
-@keyframes waterFlow {
-  from { background-position: 0 0, 0 0, 0 0; }
-  to { background-position: 0 0, 0 0, -56px 0; }
+/* keep in sync with STORM_DURATION in theme.js */
+@keyframes tornadoSweep {
+  0% { transform: translateX(148%) scaleY(0.7); opacity: 0; }
+  10% { opacity: 1; }
+  48% { transform: translateX(0%) scaleY(1); opacity: 1; }
+  62% { transform: translateX(0%) scaleY(1.03); opacity: 1; }
+  100% { transform: translateX(-148%) scaleY(0.85); opacity: 1; }
 }
-/* a turbo brightness+saturation flash right as the wave hits full
-   coverage, to sell the "crash" moment */
-@keyframes waveCrash {
-  0%, 44% { filter: brightness(1) saturate(1); }
-  48% { filter: brightness(1.45) saturate(1.35); }
-  56% { filter: brightness(1) saturate(1); }
-  100% { filter: brightness(1) saturate(1); }
+/* a quick double-flicker of lightning over the whole screen as the
+   storm rolls in */
+.lightning-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  pointer-events: none;
+  background: #fff;
+  opacity: 0;
+}
+.lightning-flash.flashing {
+  animation: lightningFlash 900ms ease-out forwards;
+}
+@keyframes lightningFlash {
+  0% { opacity: 0; }
+  6% { opacity: 0.85; }
+  14% { opacity: 0.08; }
+  22% { opacity: 0.6; }
+  32% { opacity: 0; }
+  100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .berry-runner, .theme-wash-overlay.washing, .theme-wash-overlay.washing::before, .wave-berry { animation: none; display: none; }
+  .berry-runner, .berry-tornado.storming, .lightning-flash.flashing, .tornado-orbit, .tornado-berry { animation: none; display: none; }
 }

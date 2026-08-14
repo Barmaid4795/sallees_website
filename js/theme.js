@@ -3,8 +3,8 @@
 
   var html = document.documentElement;
   var toggle = document.querySelector(".berry-toggle");
-  var overlay = document.querySelector(".theme-wash-overlay");
-  if (!toggle || !overlay) return;
+  var storm = document.querySelector(".berry-tornado");
+  if (!toggle || !storm) return;
 
   // Root-relative (leading "/"): these get injected into CSS custom
   // properties consumed as background-image: var(...) in sections.css, and
@@ -15,19 +15,19 @@
   var BLUEBERRY_COUNT = 40;
 
   // Keep these in sync with the durations set on .berry-runner /
-  // .theme-wash-overlay.washing in sections.css.
-  var RUN_DURATION = 2400;  // matches --run-duration on .berry-runner
-  var WAVE_DURATION = 2000; // matches the "washing" animation-duration
+  // .berry-tornado.storming in sections.css.
+  var RUN_DURATION = 2400;   // matches --run-duration on .berry-runner
+  var STORM_DURATION = 2000; // matches the "storming" animation-duration
 
   var RUN_DELAY = 0; // runner (with legs) sets off immediately
   // The berryRun keyframes put the runner at 66vw (2/3 of the screen) at
   // its 64% keyframe — keyframe percentages are fixed points in time
   // regardless of easing, so 64% of RUN_DURATION is exactly that moment.
-  var WAVE_DELAY = Math.round(RUN_DURATION * 0.64);
-  // Theme flips while the wave is mid-dwell at full coverage (its
-  // keyframes hold 100% coverage from 48%-62% of WAVE_DURATION).
-  var SWAP_AT = WAVE_DELAY + Math.round(WAVE_DURATION * 0.54);
-  var CLEANUP_AT = WAVE_DELAY + WAVE_DURATION + 50;
+  var STORM_DELAY = Math.round(RUN_DURATION * 0.64);
+  // Theme flips while the tornado is mid-dwell, fully overhead (its
+  // keyframes hold full coverage from 48%-62% of STORM_DURATION).
+  var SWAP_AT = STORM_DELAY + Math.round(STORM_DURATION * 0.54);
+  var CLEANUP_AT = STORM_DELAY + STORM_DURATION + 50;
 
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -45,25 +45,60 @@
     return html.getAttribute("data-theme") === "warm" ? "warm" : "icy";
   }
 
-  var WAVE_BERRY_COUNT = 22;
+  var TORNADO_RINGS = 7;
+  var BERRIES_PER_RING = 3;
+  var CLOUD_LEFTS = ["20%", "44%", "66%"];
 
-  function fillWaveBerries(next) {
-    overlay.innerHTML = "";
-    for (var i = 0; i < WAVE_BERRY_COUNT; i++) {
-      var img = next === "icy" ? randomBlueberryImg() : BERRY_IMG.warm;
-      var b = document.createElement("div");
-      b.className = "wave-berry";
-      b.style.setProperty("--wb-img", "url(\"" + img + "\")");
-      b.style.setProperty("--wb-size", (22 + Math.random() * 30) + "px");
-      b.style.setProperty("--wb-duration", (600 + Math.random() * 900) + "ms");
-      b.style.setProperty("--wb-bob-duration", (900 + Math.random() * 900) + "ms");
-      // Scattered through the water's fill area (bottom ~70% of the
-      // screen); the overlay's own clip-path hides anything that lands
-      // above the waterline, so this range can be a little generous.
-      b.style.left = (2 + Math.random() * 94) + "%";
-      b.style.top = (36 + Math.random() * 56) + "%";
-      overlay.appendChild(b);
+  function fillStorm(next) {
+    storm.innerHTML = "";
+
+    CLOUD_LEFTS.forEach(function (left) {
+      var cloud = document.createElement("div");
+      cloud.className = "storm-cloud";
+      cloud.style.left = left;
+      storm.appendChild(cloud);
+    });
+
+    var funnel = document.createElement("div");
+    funnel.className = "tornado-funnel";
+    for (var r = 0; r < TORNADO_RINGS; r++) {
+      var t = r / (TORNADO_RINGS - 1); // 0 (top, narrow) -> 1 (bottom, wide)
+      var radius = 14 + t * 130;
+      var orbitDur = (1.7 - t * 1.1).toFixed(2) + "s"; // spins fastest near the narrow top
+      var orbitDir = r % 2 === 0 ? "normal" : "reverse"; // alternating rings for a churning look
+      for (var b = 0; b < BERRIES_PER_RING; b++) {
+        var img = next === "icy" ? randomBlueberryImg() : BERRY_IMG.warm;
+        var orbit = document.createElement("div");
+        orbit.className = "tornado-orbit";
+        orbit.style.top = (t * 100) + "%";
+        orbit.style.setProperty("--orbit-dur", orbitDur);
+        orbit.style.setProperty("--orbit-dir", orbitDir);
+        orbit.style.animationDelay = "-" + (Math.random() * 2).toFixed(2) + "s"; // random phase per berry
+
+        var berry = document.createElement("div");
+        berry.className = "tornado-berry";
+        berry.style.setProperty("--tb-img", "url(\"" + img + "\")");
+        berry.style.setProperty("--tb-size", Math.round(16 + t * 14 + Math.random() * 8) + "px");
+        berry.style.setProperty("--radius", Math.round(radius) + "px");
+        berry.style.setProperty("--tb-spin-dur", Math.round(500 + Math.random() * 500) + "ms");
+
+        orbit.appendChild(berry);
+        funnel.appendChild(orbit);
+      }
     }
+    storm.appendChild(funnel);
+  }
+
+  function spawnLightning() {
+    var flash = document.createElement("div");
+    flash.className = "lightning-flash";
+    document.body.appendChild(flash);
+    requestAnimationFrame(function () {
+      flash.classList.add("flashing");
+    });
+    flash.addEventListener("animationend", function () {
+      flash.remove();
+    });
   }
 
   function spawnRunner(fromTheme) {
@@ -91,7 +126,7 @@
     }
 
     var sprite = document.createElement("div");
-    sprite.className = "berry-runner-sprite";
+    sprite.className = "berry-runner-sprite " + (fromTheme === "warm" ? "is-strawberry" : "is-blueberry");
 
     function makeLimb(cls) {
       var limb = document.createElement("div");
@@ -129,7 +164,6 @@
 
     var leaving = currentTheme();
     var next = leaving === "icy" ? "warm" : "icy";
-    var waveImg = next === "icy" ? randomBlueberryImg() : BERRY_IMG.warm;
 
     if (reduceMotion) {
       html.setAttribute("data-theme", next);
@@ -142,13 +176,13 @@
     setTimeout(function () { spawnRunner(leaving); }, RUN_DELAY);
 
     setTimeout(function () {
-      overlay.style.setProperty("--wave-img", "url(\"" + waveImg + "\")");
-      fillWaveBerries(next);
-      overlay.classList.remove("washing");
+      fillStorm(next);
+      spawnLightning();
+      storm.classList.remove("storming");
       // force reflow so the animation can restart every click
-      void overlay.offsetWidth;
-      overlay.classList.add("washing");
-    }, WAVE_DELAY);
+      void storm.offsetWidth;
+      storm.classList.add("storming");
+    }, STORM_DELAY);
 
     setTimeout(function () {
       html.setAttribute("data-theme", next);
@@ -157,8 +191,8 @@
 
     setTimeout(function () {
       toggle.classList.remove("popping");
-      overlay.classList.remove("washing");
-      overlay.innerHTML = "";
+      storm.classList.remove("storming");
+      storm.innerHTML = "";
     }, CLEANUP_AT);
   });
 })();

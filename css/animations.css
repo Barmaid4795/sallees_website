@@ -71,6 +71,58 @@ html.loaded .hero-deco-dragonfly {
 }
 
 /* =============================================
+   First-load rain clouds — the berries fall out from
+   underneath these, not out of thin air
+   ============================================= */
+.entrance-clouds {
+  position: fixed;
+  inset: 0;
+  z-index: 740;
+  pointer-events: none;
+  overflow: hidden;
+}
+.entrance-cloud {
+  position: absolute;
+  top: -6px;
+  width: 132px;
+  height: 44px;
+  background: var(--surface);
+  border-radius: 50px;
+  opacity: 0;
+  box-shadow: 0 8px 18px -10px var(--shadow);
+}
+.entrance-cloud::before,
+.entrance-cloud::after {
+  content: "";
+  position: absolute;
+  background: var(--surface);
+  border-radius: 50%;
+}
+.entrance-cloud::before { width: 58px; height: 58px; top: -26px; left: 16px; }
+.entrance-cloud::after { width: 46px; height: 46px; top: -18px; right: 18px; }
+/* four clouds spread across the top, roughly matching the clusters the
+   rain drops fall from in js/main.js (10% / 36% / 62% / 86% of width) */
+.entrance-cloud-1 { left: 4%; animation-delay: 0ms; }
+.entrance-cloud-2 { left: 30%; width: 108px; height: 38px; animation-delay: 120ms; }
+.entrance-cloud-3 { left: 56%; width: 150px; height: 48px; animation-delay: 60ms; }
+.entrance-cloud-4 { left: 80%; width: 116px; height: 40px; animation-delay: 180ms; }
+html.loaded .entrance-cloud {
+  animation-name: cloudDrift;
+  animation-duration: 3.4s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+@keyframes cloudDrift {
+  0% { opacity: 0; transform: translateY(-18px); }
+  10% { opacity: 0.95; transform: translateY(0); }
+  76% { opacity: 0.95; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-12px); }
+}
+@media (max-width: 640px) {
+  .entrance-clouds { display: none; }
+}
+
+/* =============================================
    First-load berry rain — falls from the top and
    lands near the bottom-left, echoing the footer bear
    ============================================= */
@@ -183,8 +235,8 @@ html.loaded .hero-deco-dragonfly {
 
 /* =============================================
    Strawberry theme toggle: squish reaction
-   (the run + wave animation lives in sections.css,
-   next to .berry-runner / .theme-wash-overlay)
+   (the run + storm/tornado animation lives in
+   sections.css, next to .berry-runner / .berry-tornado)
    ============================================= */
 .berry-toggle.popping img { animation: berrySquish 0.5s ease; }
 @keyframes berrySquish {

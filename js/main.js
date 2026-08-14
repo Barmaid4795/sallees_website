@@ -15,7 +15,9 @@
     return "assets/icons/blueberries/blueberry-" + (n < 10 ? "0" + n : n) + ".png";
   }
 
-  // First-load berry rain — falls from the top, lands bottom-left near the footer bear
+  // First-load berry rain — falls from underneath the .entrance-cloud
+  // shapes (css/animations.css), lands bottom-left near the footer bear
+  var CLOUD_CENTERS = [0.12, 0.36, 0.62, 0.85]; // matches .entrance-cloud-1..4 roughly
   function spawnBerryRain() {
     var icy = html.getAttribute("data-theme") !== "warm";
     var count = icy ? 32 : 22;
@@ -24,8 +26,9 @@
     for (var i = 0; i < count; i++) {
       var berryImg = icy ? randomBlueberryImg() : "assets/icons/berry-toggle.png";
       var size = icy ? (24 + Math.random() * 38) : (20 + Math.random() * 26);
-      var startTop = -(size + Math.random() * 260);
-      var left = Math.random() * Math.min(vw * 0.9, vw - size);
+      var startTop = -(size + Math.random() * 40);
+      var cloudCenter = CLOUD_CENTERS[Math.floor(Math.random() * CLOUD_CENTERS.length)];
+      var left = Math.max(0, Math.min(vw - size, vw * cloudCenter + (Math.random() * 90 - 45)));
       var landY = vh - (36 + Math.random() * 70);
       var drop = document.createElement("div");
       drop.className = "berry-rain-drop";
@@ -107,7 +110,7 @@
     drop.appendChild(windB);
 
     var sprite = document.createElement("div");
-    sprite.className = "berry-runner-sprite berry-parachute-sprite";
+    sprite.className = "berry-runner-sprite berry-parachute-sprite " + (icy ? "is-strawberry" : "is-blueberry");
 
     function makeLimb(cls) {
       var limb = document.createElement("div");
